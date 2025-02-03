@@ -37,7 +37,7 @@ abstract class PowerUp extends GameObject
       double dir = getDirection() + random(1, 3.6);
       setDirection(dir);
     }
-
+ 
     if (durationSW.getRunTime() > 10) {
       super.setInactive();
       soundPlayer.playPop();

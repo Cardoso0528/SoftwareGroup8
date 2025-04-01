@@ -1,6 +1,6 @@
 import re
 
-class AccountLoginManager:
+class ClientAccount:
     def __init__(self):
         self.users_db = {} # Simulate databse for user accounts
         self.logged_in_users = set() # Track users logged in
@@ -37,10 +37,10 @@ class AccountLoginManager:
         return "Error: Invalid username or password."
 
 if __name__ == "__main__":
-    account_manager = AccountLoginManager()
+    client_account = ClientAccount()
 
-    print(account_manager.register_user("john_doe", "password123", "john@example.com"))  # Register user
-    print(account_manager.login_user("john_doe", "password123"))  # Successful login
-    print(account_manager.is_logged_in("john_doe"))  # Check login status (True)
-    print(account_manager.logout_user("john_doe"))  # Logout user
-    print(account_manager.is_logged_in("john_doe"))  # Check login status (False)
+    print(client_account.register_user("john_doe", "password123", "john@example.com"))  # Register user
+    print(client_account.login_user("john_doe", "password123"))  # Successful login
+    print(client_account.is_logged_in("john_doe"))  # Check login status (True)
+    print(client_account.logout_user("john_doe"))  # Logout user
+    print(client_account.is_logged_in("john_doe"))  # Check login status (False)

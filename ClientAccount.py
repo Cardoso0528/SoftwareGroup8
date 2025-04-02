@@ -5,10 +5,12 @@ class ClientAccount:
         self.users_db = {} # Simulate databse for user accounts
         self.logged_in_users = set() # Track users logged in
 
+    # validate email address
     def validate_email(self, email):
         email_pattern = r"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z]+$"
         return re.match(email_pattern, email) is not None
 
+    # validate password (capital letter, special character, no spaces)
     def validate_password_characters(self, password):
         valid_password_characters = False
         uppercase_letter_found = False
@@ -25,6 +27,16 @@ class ClientAccount:
             valid_password_characters = True
         return valid_password_characters
 
+    def validate_username(self, username):
+        valid_username_characters = True
+        special_character_found = False
+        for character in username:
+            if character.isspace():
+                valid_username_characters = false
+            # username can have _ or - but no other special characters
+            if character in "~`!@#$%^&*()+={[}]|\\:;\"'<,>.?/":
+                special_character_found = True
+        return valid_username_characters and not special_character_found
 
     def register_user(self, username, password, email, first_name, last_name):
         if not self.validate_email(email):
@@ -33,6 +45,8 @@ class ClientAccount:
             return "Error: username already exists."
         if (len(username) < 8 or len(username) > 20):
             return "Error: username must be between 8 and 20 characters."
+        if not self.validate_username(username):
+            return "Error: username cannot contain spaces or special characters."
         if len(password) < 8:
             return "Error: password must be at least 8 characters."
         if not self.validate_password_characters(password):
@@ -59,6 +73,7 @@ class ClientAccount:
             return f"User {username} logged out."
         return "Error: Invalid username or password."
 
+# used for some testing
 if __name__ == "__main__":
     client_account = ClientAccount()
 

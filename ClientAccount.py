@@ -27,29 +27,6 @@ class ClientAccount:
             valid_password_characters = True
         return valid_password_characters
 
-        # validate fname && lname
-    def validate_Fname(self,first_name):
-        #no special characters 
-        special_character_found = False
-        for character in first_name:
-            if character in "~`!@#$%^&*()_-+={[}]|\\:;\"'<,>.?/":
-                special_character_found = True
-        return special_character_found
-    
-    def validate_Lname(self,last_name):
-        #no special characters 
-        special_character_found = False
-        space_found = False
-        notValidLastName = False
-        for character in last_name:
-            if character in "~`!@#$%^&*()_-+={[}]|\\:;\"'<,>.?/":
-                special_character_found = True
-            if character.isspace():
-                space_found = True
-        if special_character_found and space_found or space_found or special_character_found:
-            notValidLastName = True
-        return notValidLastName
-
     # validate username
     def validate_username(self, username):
         valid_username_characters = True
@@ -62,9 +39,31 @@ class ClientAccount:
                 special_character_found = True
         return valid_username_characters and not special_character_found
 
+    def validate_first_name(self, first_name):
+        valid_first_name_characters = True
+        for character in first_name:
+            if character in "~`!@#$%^&*()+={[}]|\\:;\"<,>.?/":
+                valid_first_name_characters = False
+            if character.isnumeric():
+                valid_first_name_characters = False
+        return valid_first_name_characters
+
+    def validate_last_name(self, last_name):
+        valid_last_name_characters = True
+        for character in last_name:
+            if character in "~`!@#$%^&*()+={[}]|\\:;\"<,>.?/":
+                valid_last_name_characters = False
+            if character.isnumeric():
+                valid_last_name_characters = False
+        return valid_last_name_characters
+
     def register_user(self, username, password, email, first_name, last_name):
         if len(first_name) < 1 or len(last_name) < 1:
             return "Error: first and last name must not be empty."
+        if not self.validate_first_name(first_name):
+            return "Error: first name contains invalid characters."
+        if not self.validate_last_name(last_name):
+            return "Error: last name contains invalid characters."
         if not self.validate_email(email):
             return "Error: invalid email"
         if username in self.users_db:
@@ -79,10 +78,6 @@ class ClientAccount:
             return "Error: password must contain at least one capital letter and one special character and no spaces."
         if email in self.users_db:
             return "Error: email already in use."
-        if self.validate_Fname(first_name):
-            return "Error: First name has a special character."
-        if self.validate_Lname(last_name):
-            return "Error: Last name has a special character or space in it."
         self.users_db[username] = {"password": password, "fname": first_name, "lname": last_name, "email": email}
         return f"User {username} registered successfully."
 

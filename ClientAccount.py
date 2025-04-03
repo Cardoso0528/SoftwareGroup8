@@ -40,6 +40,8 @@ class ClientAccount:
         return valid_username_characters and not special_character_found
 
     def register_user(self, username, password, email, first_name, last_name):
+        if len(first_name) < 1 or len(last_name) < 1:
+            return "Error: first and last name must not be empty."
         if not self.validate_email(email):
             return "Error: invalid email"
         if username in self.users_db:

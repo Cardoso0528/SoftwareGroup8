@@ -41,7 +41,27 @@ def test_register_user8():
     assert user.register_user("john_doe", "Password123!", "john@example.com", "john", "doe") == "Error: username already exists."
 
 
+#Testing NAMES 
 
+#VALID FIRSTNAME
+def test_firstName9():
+    testFname = ClientAccount()
+    assert testFname.register_user("john_doe", "Password123!", "john@example.com", "john", "doe") == "User john_doe registered successfully."
+
+#VALID LAST NAME
+def test_lastName10():
+    testLname = ClientAccount()
+    assert testLname.register_user("john_doe", "Password123!", "john@example.com", "john", "doe") == "User john_doe registered successfully."
+
+#Testing Firstname for special characters
+def test_firstName11():
+    testFname = ClientAccount()
+    assert testFname.register_user("john_doe", "Password123!", "john@example.com", "john!#@", "doe") == "Error: First name has a special character."
+
+#Testing Lastname for special characters or space
+def test_firstName12():
+    testFname = ClientAccount()
+    assert testFname.register_user("john_doe", "Password123!", "john@example.com", "john", "doe !@#") == "Error: Last name has a special character or space in it."
 
 #LOGIN TESTING
 

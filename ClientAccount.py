@@ -27,12 +27,13 @@ class ClientAccount:
             valid_password_characters = True
         return valid_password_characters
 
+    # validate username
     def validate_username(self, username):
         valid_username_characters = True
         special_character_found = False
         for character in username:
             if character.isspace():
-                valid_username_characters = false
+                valid_username_characters = False
             # username can have _ or - but no other special characters
             if character in "~`!@#$%^&*()+={[}]|\\:;\"'<,>.?/":
                 special_character_found = True

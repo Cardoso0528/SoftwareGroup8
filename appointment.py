@@ -2,11 +2,11 @@ from service import Service
 
 class Appointment:
     def __init__(self, service=None, time=None, stylist=None, is_confirm=False, is_upcoming=True):
-        self.service = service  # Service object
-        self.time = time  # Appointment time
-        self.stylist = stylist  # Stylist name
-        self.is_confirm = is_confirm  # Boolean to confirm appointment
-        self.is_upcoming = is_upcoming  # Boolean to check if appointment is upcoming
+        self.service = service
+        self.time = time
+        self.stylist = stylist
+        self.is_confirm = is_confirm
+        self.is_upcoming = is_upcoming
 
     def update_appointment_service(self, service_name, description, price):
         new_service = Service()

@@ -7,6 +7,24 @@ class Service:
         self.description = None
         self.cost = None
 
+    def get_name(self):
+        return self.name
+
+    def set_name(self, name):
+        return self.name = name
+
+    def get_description(self):
+        return self.description
+
+    def set_description(self, description):
+        return self.description = description
+
+    def get_cost(self):
+        return self.cost
+
+    def set_description(self, cost):
+        return self.cost = cost
+    
     def validate_cost(self, cost):
         pattern = r"^\d+\.\d{2}$"
         valid_cost = True

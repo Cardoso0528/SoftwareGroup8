@@ -47,21 +47,30 @@ def test_register_user8():
 def test_firstName9():
     testFname = ClientAccount()
     assert testFname.register_user("john_doe", "Password123!", "john@example.com", "john", "doe") == "User john_doe registered successfully."
+def test_firstName10():
+    testFname = ClientAccount()
+    assert testFname.register_user("john_doe", "Password123!",  "john@example.com", "john2", "doe") == "Error: first name contains invalid characters."
 
-#VALID LAST NAME
-def test_lastName10():
-    testLname = ClientAccount()
-    assert testLname.register_user("john_doe", "Password123!", "john@example.com", "john", "doe") == "User john_doe registered successfully."
-
-#Testing Firstname for special characters
 def test_firstName11():
     testFname = ClientAccount()
-    assert testFname.register_user("john_doe", "Password123!", "john@example.com", "john!#@", "doe") == "Error: First name has a special character."
+    assert testFname.register_user("john_doe", "Password123!", "john@example.com", "", "doe") == "Error: first and last name must not be empty."
 
-#Testing Lastname for special characters or space
 def test_firstName12():
     testFname = ClientAccount()
-    assert testFname.register_user("john_doe", "Password123!", "john@example.com", "john", "doe !@#") == "Error: Last name has a special character or space in it."
+    assert testFname.register_user("john_doe", "Password123!", "john@example.com", "john@3", "doe") == "Error: first name contains invalid characters."
+
+#VALID LAST NAME
+
+#Testing lastname for special characters
+def test_firstName13():
+    testFname = ClientAccount()
+    assert testFname.register_user("john_doe", "Password123!", "john@example.com", "john", "doe12") == "Error: last name contains invalid characters."
+
+#Testing Lastname for special characters or space
+def test_firstName14():
+    testFname = ClientAccount()
+    assert testFname.register_user("john_doe", "Password123!", "john@example.com", "john", "doe!@#") == "Error: last name contains invalid characters."
+
 
 #LOGIN TESTING
 

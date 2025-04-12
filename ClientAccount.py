@@ -39,7 +39,31 @@ class ClientAccount:
                 special_character_found = True
         return valid_username_characters and not special_character_found
 
+    def validate_first_name(self, first_name):
+        valid_first_name_characters = True
+        for character in first_name:
+            if character in "~`!@#$%^&*()+={[}]|\\:;\"<,>.?/":
+                valid_first_name_characters = False
+            if character.isnumeric():
+                valid_first_name_characters = False
+        return valid_first_name_characters
+
+    def validate_last_name(self, last_name):
+        valid_last_name_characters = True
+        for character in last_name:
+            if character in "~`!@#$%^&*()+={[}]|\\:;\"<,>.?/":
+                valid_last_name_characters = False
+            if character.isnumeric():
+                valid_last_name_characters = False
+        return valid_last_name_characters
+
     def register_user(self, username, password, email, first_name, last_name):
+        if len(first_name) < 1 or len(last_name) < 1:
+            return "Error: first and last name must not be empty."
+        if not self.validate_first_name(first_name):
+            return "Error: first name contains invalid characters."
+        if not self.validate_last_name(last_name):
+            return "Error: last name contains invalid characters."
         if not self.validate_email(email):
             return "Error: invalid email"
         if username in self.users_db:

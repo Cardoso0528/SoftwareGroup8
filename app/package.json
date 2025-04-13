@@ -5,7 +5,10 @@
   "scripts": {
     "client": "cd client && npm run dev",
     "server": "cd server && npm run dev",
-    "dev": "concurrently \"npm run server\" \"npm run client\""
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "installClient": "cd client && npm install",
+    "installServer": "cd server && npm install",
+    "install": "concurrently \"npm installClient\" \"npm installServer\""
   },
   "keywords": [],
   "author": "",

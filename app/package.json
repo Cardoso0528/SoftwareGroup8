@@ -8,7 +8,7 @@
     "dev": "concurrently \"npm run server\" \"npm run client\"",
     "installClient": "cd client && npm install",
     "installServer": "cd server && npm install",
-    "install": "concurrently \"npm installClient\" \"npm installServer\""
+    "install": "concurrently \"npm run installClient\" \"npm run installServer\""
   },
   "keywords": [],
   "author": "",

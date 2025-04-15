@@ -4,7 +4,6 @@ import AccountSetting from './pages/AccountSetting'
 import Availability from './pages/Availability'
 import HairstylistDashboard from './pages/HairstylistDashboard'
 import EditService from './pages/EditService'
-//import './App.css'
 import Login from './components/Login';
 import Landing from './components/Landing';
 import AboutUs from './components/AboutUs';

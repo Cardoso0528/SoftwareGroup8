@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { FaGoogle, FaApple } from 'react-icons/fa';
-import './Login.css';
+import '../styles/Login.css';
 
 const Login = () => {
   const [isLogin, setIsLogin] = useState(true);

@@ -14,12 +14,16 @@ import { TimePicker } from '@mui/x-date-pickers/TimePicker';
 export default function AccountSetting() {
   return (
     <Box>
-      <NavBar/>
+      <NavBar
+        navText="Set Availability"
+        drawerOptions={[
+          {label: "Dashboard", path: "/hairstylist-dashboard"},
+          {label: "Account Settings", path: "/account-settings"},
+          {label: "Edit Services", path: "/edit-services"},
+          {label: "Logout", path: "/"}
+        ]}/>
       <Grid container rowSpacing={2} columnSpacing={2} justifyContent={"center"}>
         <LocalizationProvider dateAdapter={AdapterDayjs}>
-        <Typography>
-          Set Availability
-        </Typography>
         <Grid container rowSpacing={1} columnSpacing={2} justifyContent={"center"}>
           <Grid>
             <DatePicker label="Select Start Date"/>

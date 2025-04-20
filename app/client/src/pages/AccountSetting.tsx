@@ -8,7 +8,12 @@ import Button from '@mui/material/Button'
 export default function AccountSetting() {
   return (
     <Box>
-      <NavBar/>
+      <NavBar
+        navText="Account Settings"
+        drawerOptions={[
+          {label: "Dashboard", path: "/"},
+        ]}
+      />
       <Grid container rowSpacing={2} columnSpacing={2} justifyContent={"center"}>
         <Typography>
           Account Settings

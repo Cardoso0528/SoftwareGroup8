@@ -2,6 +2,7 @@ import express, { Express, Request, Response } from 'express';
 import cors from 'cors';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
+import routes from './routes';
 
 dotenv.config();
 
@@ -27,6 +28,8 @@ app.get('/health', (_req: Request, res: Response) => {
 });
 
 const PORT: string | number = process.env.PORT || 3000;
+
+app.use('/api', routes());
 
 app.listen(PORT, () => {
     console.log(`Server is running on PORT: ${PORT}`);

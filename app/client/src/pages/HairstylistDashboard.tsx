@@ -4,7 +4,9 @@ import Card from '@mui/material/Card'
 import Calendar from '../components/Calendar'
 import NavBar from '../components/TopNavBar';
 import CardContent from '@mui/material/CardContent'
+import CardActions from '@mui/material/CardActions'
 import Typography from '@mui/material/Typography'
+import Button from '@mui/material/Button'
 import dayjs from 'dayjs'
 
 
@@ -59,13 +61,16 @@ export default function HairstylistDashboard() {
         <Box flex={1}>
           <Grid container spacing={3}>
             {appointments.map((appointment, index) => (
-              <Grid key={index} sx={{xs:12, sm:6, md:4}} >
+              <Grid key={index} sx={{xs: 12, sm: 6, md: 4}} >
                 <Card>
                   <CardContent>
                     <Typography variant="h6">{"Appointment " + (index + 1) + ": " + appointment.service}</Typography>
                     <Typography variant="subtitle1">{dayjs(appointment.time).format("MMMM D")}</Typography>
                     <Typography variant="body2">{dayjs(appointment.time).format("h:mm A")}</Typography>
                   </CardContent>
+                  <CardActions sx={{justifyContent: "center"}}>
+                    <Button variant="contained">Cancel</Button>
+                  </CardActions>
                 </Card>
               </Grid>
             ))}

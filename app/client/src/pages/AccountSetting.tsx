@@ -1,57 +1,57 @@
-import Grid from '@mui/material/Grid'
-import Box from '@mui/material/Box'
-import TextField from '@mui/material/TextField'
+import Box from '@mui/material/Box';
+import TextField from '@mui/material/TextField';
 import NavBar from '../components/TopNavBar';
-//import Typography from '@mui/material/Typography'
-import Button from '@mui/material/Button'
+import Typography from '@mui/material/Typography';
+import Button from '@mui/material/Button';
+
+const userType: string = "client";
 
 export default function AccountSetting() {
   return (
     <Box>
       <NavBar
         navText="Account Settings"
-        drawerOptions={[
-          {label: "Dashboard", path: "/"},
-        ]}
+        drawerOptions={[(userType === "client") ? { label: "Account Settings", path: "/client-dashboard" } : { label: "Account Settings", path: "/hairstylist-dashboard" }]}
       />
-      <Grid container rowSpacing={2} columnSpacing={2} justifyContent={"center"}>
-        <Grid container rowSpacing={1} justifyContent={"center"}>
-          <Grid>
-            <TextField
-              label="First Name"
-            />
-          </Grid>
-          <Grid>
-            <TextField
-              label="Last Name"
-            />
-          </Grid>
-          <Grid>
-            <TextField
-              label="Email"
-            />
-          </Grid>
-          <Grid>
-            <TextField
-              label="Username"
-            />
-          </Grid>
-          <Grid>
-            <TextField
-              label="Password"
-              type="password"
-              autoComplete="current-password"
-            />
-          </Grid>
-        </Grid>
-        <Grid>
-          <Grid>
+      <Box display="flex" flexDirection="column" sx={{ xs: 12 }} >
+        <form>
+          <Typography variant="h6" align="left" gutterBottom>
+            First Name
+          </Typography>
+          <TextField fullWidth variant="outlined" 
+          sx={{ flex: "1 1 auto", minWidth: "300px", maxWidth: "100vh"}}/>
+          <Typography variant="h6" align="left" gutterBottom>
+            Last Name
+          </Typography>
+          <TextField fullWidth variant="outlined" 
+          sx={{ flex: "1 1 auto", minWidth: "300px", maxWidth: "100vh" }}/>
+          <Typography variant="h6" align="left" gutterBottom>
+            Email
+          </Typography>
+          <TextField fullWidth variant="outlined" 
+          sx={{ flex: "1 1 auto", minWidth: "300px", maxWidth: "100vh" }}/>
+          <Typography variant="h6" align="left" gutterBottom>
+            Username
+          </Typography>
+          <TextField fullWidth variant="outlined" 
+          sx={{ flex: "1 1 auto", minWidth: "300px", maxWidth: "100vh" }}/>
+          <Typography variant="h6" align="left" gutterBottom>
+            Password
+          </Typography>
+          <TextField
+            fullWidth
+            type="password"
+            autoComplete="current-password"
+            variant="outlined"
+            sx={{ flex: "1 1 auto", minWidth: "300px", maxWidth: "1280px" }}
+          />
+          <Box m={2}>
             <Button variant="contained">
               Save
             </Button>
-          </Grid>
-        </Grid>
-      </Grid>
+          </Box>
+        </form>
+        </Box>
     </Box>
   );
 }

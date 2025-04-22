@@ -3,6 +3,7 @@ import cors from 'cors';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import routes from './routes';
+import serviceRoutes from './routes/service.routes';
 
 dotenv.config();
 
@@ -28,6 +29,8 @@ app.get('/health', (_req: Request, res: Response) => {
 });
 
 const PORT: string | number = process.env.PORT || 3000;
+
+app.use('/api/services', serviceRoutes);
 
 app.use('/api', routes());
 

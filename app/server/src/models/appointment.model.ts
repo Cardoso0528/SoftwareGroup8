@@ -3,6 +3,10 @@ import Service from './service.model'
 
 const appointmentSchema = new mongoose.Schema(
     {
+        username: {
+            type: String,
+            required: true,
+        },
         service:{
             type: mongoose.Schema.Types.ObjectId, ref: Service,
             required: true,
@@ -15,7 +19,14 @@ const appointmentSchema = new mongoose.Schema(
             type: String,
             required: true,
         },
-
+        notes:{
+            type: String,
+            required: true,
+        },
+        confirm:{
+            type: Boolean,
+            required: true,
+        }
 
     }
 );

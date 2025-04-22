@@ -1,6 +1,7 @@
 import {Calendar as BigCalendar, CalendarProps, dayjsLocalizer, Views} from 'react-big-calendar'
 import dayjs from 'dayjs'
 import {useState, useCallback} from 'react'
+import '../styles/Calendar.css'
 
 const localizer = dayjsLocalizer(dayjs);
 

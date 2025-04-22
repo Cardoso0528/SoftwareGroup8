@@ -7,30 +7,33 @@ import CardContent from '@mui/material/CardContent'
 import Typography from '@mui/material/Typography'
 import dayjs from 'dayjs'
 
+
 interface Appointment {
-  title: string;
-  services: string;
-  date: string;
+  username: string;
+  service: string;
   time: string;
-  duration: number;
+  stylist: string;
+  notes: string;
+  confirm: boolean;
+  duration: number; // assuming in minutes for now
 }
 
 const appointments: Appointment[] = [
-  { title: "Appointment 1", services: "Haircut", date: "Thursday 3/13/25", time: "2:00 pm", duration: 60 },
-  { title: "Appointment 2", services: "Haircut", date: "Wednesday 3/26/25", time: "1:45 pm", duration: 45 },
-  { title: "Appointment 3", services: "Haircut", date: "Friday 4/11/25", time: "11:30 am", duration: 30 },
+  { username: "JohnDoe", service: "Haircut", time: "Thursday 3/13/25 2:00 pm", stylist: "Alice", notes: "Regular trim", confirm: true, duration: 60},
+  { username: "JaneSmith", service: "Coloring", time: "Wednesday 3/26/25 1:45 pm", stylist: "Bob", notes: "Touch-up", confirm: false, duration: 30 },
+  { username: "MikeBrown", service: "Shaving", time: "Friday 4/11/25 11:30 am", stylist: "Charlie", notes: "Add beard trim", confirm: true, duration: 45 },
 ];
 
 const events = appointments.map((appointment) => {
-  const startDateTime = dayjs(`${appointment.date} ${appointment.time}`, "dddd MM/DD/YY h:mm a");
+  const startDateTime = dayjs(appointment.time, "dddd MM/DD/YY h:mm a");
   return {
-    title: appointment.title,
+    title: `${appointment.service} for ${appointment.username}`,
     start: startDateTime.toDate(),
-    end: startDateTime.add(appointment.duration, 'minute').toDate(), 
+    end: startDateTime.add(appointment.duration, 'minute').toDate(),
   };
 });
 
-export default function ClientDashboard() {
+export default function HairstylistDashboard() {
   return (
     <Box>
       <NavBar 
@@ -59,10 +62,9 @@ export default function ClientDashboard() {
               <Grid key={index} sx={{xs:12, sm:6, md:4}} >
                 <Card>
                   <CardContent>
-                    <Typography variant="h6">{appointment.title}</Typography>
-                    <Typography variant="subtitle1">{appointment.date}</Typography>
-                    <Typography variant="body2">{appointment.time}</Typography>
-                    <Typography variant="body2">{appointment.services}</Typography>
+                    <Typography variant="h6">{"Appointment " + (index + 1) + ": " + appointment.service}</Typography>
+                    <Typography variant="subtitle1">{dayjs(appointment.time).format("MMMM D")}</Typography>
+                    <Typography variant="body2">{dayjs(appointment.time).format("h:mm A")}</Typography>
                   </CardContent>
                 </Card>
               </Grid>

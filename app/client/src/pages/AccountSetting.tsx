@@ -2,7 +2,7 @@ import Grid from '@mui/material/Grid'
 import Box from '@mui/material/Box'
 import TextField from '@mui/material/TextField'
 import NavBar from '../components/TopNavBar';
-import Typography from '@mui/material/Typography'
+//import Typography from '@mui/material/Typography'
 import Button from '@mui/material/Button'
 
 export default function AccountSetting() {
@@ -15,9 +15,6 @@ export default function AccountSetting() {
         ]}
       />
       <Grid container rowSpacing={2} columnSpacing={2} justifyContent={"center"}>
-        <Typography>
-          Account Settings
-        </Typography>
         <Grid container rowSpacing={1} justifyContent={"center"}>
           <Grid>
             <TextField

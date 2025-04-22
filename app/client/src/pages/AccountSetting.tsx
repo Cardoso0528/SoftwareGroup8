@@ -11,7 +11,9 @@ export default function AccountSetting() {
     <Box>
       <NavBar
         navText="Account Settings"
-        drawerOptions={[(userType === "client") ? { label: "Account Settings", path: "/client-dashboard" } : { label: "Account Settings", path: "/hairstylist-dashboard" }]}
+        drawerOptions={[(userType === "client") ? { label: "Dashboard", path: "/client-dashboard" } : { label: "Dashboard", path: "/hairstylist-dashboard" }, 
+          {label: "Logout", path: "/"}
+        ]}
       />
       <Box display="flex" flexDirection="column" sx={{ xs: 12 }} >
         <form>

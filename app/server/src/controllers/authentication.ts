@@ -68,11 +68,6 @@ export const register = async (req: Request, res: Response, next: NextFunction):
     try {
         const { email, username, password, firstname, lastname, userType } = req.body;
 
-        if (!email || !password || !username || !firstname || !lastname || !userType) {
-            res.status(400).json({ message: 'All fields are required' });
-            return;
-        }
-
         const existingUser = await getUserByEmail(email);
         if (existingUser) {
             res.status(400).json({ message: 'Email already exists' });

@@ -69,7 +69,7 @@ export default function HairstylistDashboard() {
                     <Typography variant="body2">{dayjs(appointment.time).format("h:mm A")}</Typography>
                   </CardContent>
                   <CardActions sx={{justifyContent: "center"}}>
-                    <Button variant="contained">Cancel</Button>
+                    <Button variant="contained" sx={{ background: "#ef69a7" }}>Cancel</Button>
                   </CardActions>
                 </Card>
               </Grid>

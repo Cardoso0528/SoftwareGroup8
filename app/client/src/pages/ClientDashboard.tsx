@@ -66,9 +66,9 @@ export default function ClientDashboard() {
                     <Typography variant="subtitle1">{dayjs(appointment.time).format("MMMM D")}</Typography>
                     <Typography variant="body2">{dayjs(appointment.time).format("h:mm A")}</Typography>
                   </CardContent>
-                  <CardActions>
-                    <Button variant="contained">Confirm</Button>
-                    <Button variant="contained">Cancel</Button>
+                  <CardActions sx={{justifyContent: "space-between"}}>
+                    <Button variant="contained" sx={{ background: "#ef69a7" }}>Confirm</Button>
+                    <Button variant="contained" sx={{ background: "#ef69a7" }}>Cancel</Button>
                   </CardActions>
                 </Card>
               </Grid>

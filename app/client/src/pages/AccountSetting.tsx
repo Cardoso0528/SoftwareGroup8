@@ -8,35 +8,40 @@ const userType: string = "client";
 
 export default function AccountSetting() {
   return (
-    <Box>
+    <Box
+    sx={{
+      minHeight: "100vh",       
+      width: {xs: 300, sm: 600, md: 900, lg: 1200},           
+      justifyContent: "center"
+    }}>
       <NavBar
         navText="Account Settings"
         drawerOptions={[(userType === "client") ? { label: "Dashboard", path: "/client-dashboard" } : { label: "Dashboard", path: "/hairstylist-dashboard" }, 
           {label: "Logout", path: "/"}
         ]}
       />
-      <Box display="flex" flexDirection="column" sx={{ xs: 12 }} >
+      <Box display="flex" flexDirection="column" >
         <form>
           <Typography variant="h6" align="left" gutterBottom>
             First Name
           </Typography>
           <TextField fullWidth variant="outlined" 
-          sx={{ flex: "1 1 auto", minWidth: "300px", maxWidth: "100vh"}}/>
+          sx={{ flex: "1 1 auto", minWidth: "300px", maxWidth: "100%"}}/>
           <Typography variant="h6" align="left" gutterBottom>
             Last Name
           </Typography>
           <TextField fullWidth variant="outlined" 
-          sx={{ flex: "1 1 auto", minWidth: "300px", maxWidth: "100vh" }}/>
+          sx={{ flex: "1 1 auto", minWidth: "300px", maxWidth: "100%" }}/>
           <Typography variant="h6" align="left" gutterBottom>
             Email
           </Typography>
           <TextField fullWidth variant="outlined" 
-          sx={{ flex: "1 1 auto", minWidth: "300px", maxWidth: "100vh" }}/>
+          sx={{ flex: "1 1 auto", minWidth: "300px", maxWidth: "100%" }}/>
           <Typography variant="h6" align="left" gutterBottom>
             Username
           </Typography>
           <TextField fullWidth variant="outlined" 
-          sx={{ flex: "1 1 auto", minWidth: "300px", maxWidth: "100vh" }}/>
+          sx={{ flex: "1 1 auto", minWidth: "300px", maxWidth: "100%" }}/>
           <Typography variant="h6" align="left" gutterBottom>
             Password
           </Typography>
@@ -45,7 +50,7 @@ export default function AccountSetting() {
             type="password"
             autoComplete="current-password"
             variant="outlined"
-            sx={{ flex: "1 1 auto", minWidth: "300px", maxWidth: "1280px" }}
+            sx={{ flex: "1 1 auto", minWidth: "300px", maxWidth: "100%"}}
           />
           <Box m={2}>
             <Button variant="contained">

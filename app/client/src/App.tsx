@@ -1,8 +1,14 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Login from './components/Login';
-import Landing from './components/Landing';
-import AboutUs from './components/AboutUs';
-import './App.css';
+import {BrowserRouter as Router, Routes, Route} from 'react-router-dom'
+import ClientDashboard from './pages/ClientDashboard'
+import AccountSetting from './pages/AccountSetting'
+import Availability from './pages/Availability'
+import HairstylistDashboard from './pages/HairstylistDashboard'
+import MakeAppointment from './pages/MakeAppointment'
+import EditService from './pages/EditService'
+import Login from './pages/Login';
+import Landing from './pages/Landing';
+import AboutUs from './pages/AboutUs';
+import './styles/App.css';
 
 function App() {
   return (
@@ -12,6 +18,12 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/about" element={<AboutUs />} />
         <Route path="/services" element={<div>Services Page</div>} />
+        <Route path="/client-dashboard" element={<ClientDashboard />}/>
+        <Route path="/hairstylist-dashboard" element={<HairstylistDashboard/>}/>
+        <Route path="/account-settings" element={<AccountSetting/>}/>
+        <Route path="/set-availability" element={<Availability/>}/>
+        <Route path="/edit-services" element={<EditService/>}/>
+        <Route path="/make-appointment" element={<MakeAppointment/>}/>
       </Routes>
     </Router>
   );

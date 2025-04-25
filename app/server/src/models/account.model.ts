@@ -38,7 +38,8 @@ export default Account;
 
 export const getUsers = () => Account.find();
 export const getUserByEmail = (email: string) => Account.findOne({ email });
+export const getUserByUsername = (username: string) => Account.findOne({ username });
 export const getUserById = (id: string) => Account.findById(id);
-export const createUser = (values: Record<string, any>) => new Account(values).save().then((user) => user.toObject());
+export const createUser = (values: Record<string, any>) => new Account(values).save();
 export const deleteUserById = (id: string) => Account.findOneAndDelete({_id: id});
 export const updateUserByEmail = (email: string, values: Record<string, any>) => Account.findByIdAndUpdate(email, values);

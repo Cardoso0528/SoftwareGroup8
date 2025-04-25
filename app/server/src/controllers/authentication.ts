@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import bcrypt from 'bcryptjs';
-import { getUserByEmail, createUser } from '../models/account.model';
+import { getUserByEmail, createUser, getUserByUsername } from '../models/account.model';
 
 export const logout = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
@@ -27,30 +27,35 @@ export const logout = async (req: Request, res: Response, next: NextFunction): P
 
 export const login = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
-        const { email, password } = req.body;
+        const { username, email, password } = req.body;
 
-        if (!email || !password) {
-            res.status(400).json({ message: 'Email and password are required' });
+        if (!username || !email || !password) {
+            res.status(400).json({ message: 'All fields are required' });
             return;
         }
 
         const user = await getUserByEmail(email);
 
         if (!user) {
-            res.status(401).json({ message: 'Invalid email or password' });
+            res.status(401).json({ message: 'Invalid username, email, or password' });
+            return;
+        }
+
+        if (user.username !== username) {
+            res.status(401).json({ message: 'Invalid username, email, or password' });
             return;
         }
 
         const isPasswordCorrect = await bcrypt.compare(password, user.password);
         if (!isPasswordCorrect) {
-            res.status(401).json({ message: 'Invalid email or password' });
+            res.status(401).json({ message: 'Invalid username, email, or password' });
             return;
         }
 
         const { password: _, ...userWithoutPassword } = user.toObject();
 
         req.session.user = {
-            id: user._id,
+            _id: user._id,
             email: user.email,
             username: user.username,
             firstname: user.firstname,
@@ -74,6 +79,12 @@ export const register = async (req: Request, res: Response, next: NextFunction):
             return;
         }
 
+        const existingUsername = await getUserByUsername(username);
+        if(existingUsername) {
+            res.status(400).json({ message: 'Username already exists' });
+            return;
+        }
+
         const hashedPassword = await bcrypt.hash(password, 10);
         const user = await createUser({
             email,
@@ -83,7 +94,9 @@ export const register = async (req: Request, res: Response, next: NextFunction):
             lastname,
             userType,
         });
-        res.status(200).json(user);
+
+        const { password: _, ...userWithoutPassword } = user.toObject();
+        res.status(200).json({message: 'Registration successful', user: userWithoutPassword});
     } catch (error) {
         console.log(error);
         res.status(500).json({ message: 'Internal server error' });

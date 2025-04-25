@@ -4,7 +4,7 @@ import { ObjectIdToString } from 'mongoose';
 declare module 'express-session' {
     interface SessionData {
         user: {
-            id: ObjectIdToString;
+            _id: ObjectIdToString;
             email: string;
             username: string;
             firstname: string;

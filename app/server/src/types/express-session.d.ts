@@ -1,10 +1,10 @@
-import { Session } from 'express-session';
-import { ObjectId, ObjectIdToString } from 'mongoose';
+import 'express-session';
+import { ObjectIdToString } from 'mongoose';
 
 declare module 'express-session' {
-    export interface SessionData {
+    interface SessionData {
         user: {
-            id: string;
+            id: ObjectIdToString;
             email: string;
             username: string;
             firstname: string;

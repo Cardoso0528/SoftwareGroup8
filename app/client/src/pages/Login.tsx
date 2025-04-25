@@ -40,7 +40,19 @@ const Login = () => {
         
         <form className="login-form" onSubmit={handleSubmit}>
           {!isLogin && (
-            <div className="form-group">
+            <div>
+              <div className="form-group">
+                <input
+                  type="text"
+                  placeholder="Full Name"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  className="form-input"
+                  required
+                />
+              </div>
+
+              <div className="form-group">
               <input
                 type="text"
                 placeholder="Full Name"
@@ -49,6 +61,7 @@ const Login = () => {
                 className="form-input"
                 required
               />
+              </div>
             </div>
           )}
           

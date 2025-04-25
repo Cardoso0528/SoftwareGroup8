@@ -23,10 +23,26 @@ export const getAllAccounts = async (req: Request, res: Response, next: NextFunc
 export const deleteAccount = async (req: Request, res: Response, next: NextFunction) => {
     try {
         const { id } = req.params;
+        const user = req.session.user;
+
+        if(!user) {
+            res.status(401).json({ message: 'Unauthorized' });
+            return;
+        }
+
+        if(user.userType !== 'admin' && user._id !== id) {
+            res.status(403).json({ message: 'Forbidden' });
+            return;
+        }
 
         const deletedUser = await deleteUserById(id);
 
-        res.json(deletedUser);
+        if (!deletedUser) {
+            res.status(404).json({ message: 'User not found' });
+            return;
+        }
+
+        res.status(200).json({mesage: 'User deleted successfully'});
     } catch (error) {
         console.log(error);
         res.status(500).json({ message: 'Internal server error' });

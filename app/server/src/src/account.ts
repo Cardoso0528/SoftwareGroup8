@@ -1,15 +1,11 @@
-
-
 class Account {
-    username: string;
-    password: string;
-    firstname: string;
-    lastname: string;
-    email: string;
-    usertype: string;
+    username: string = '';
+    password: string = '';
+    firstname: string = '';
+    lastname: string = '';
+    email: string = '';
+    usertype: string = '';
 
-    users_db: { [key: string]: any } = {}; // Simulate database for user accounts
-    logged_in_users: Set<string> = new Set(); // Track users logged in
 
 
 
@@ -101,9 +97,9 @@ class Account {
         if (!this.validate_email(email)) {
             return "Error: invalid email";
         }
-        if (this.users_db[username]) {
-            return "Error: username already exists.";
-        }
+        // if (this.users_db[username]) {
+        //     return "Error: username already exists.";
+        // }
         if (username.length < 8 || username.length > 20) {
             return "Error: username must be between 8 and 20 characters.";
         }
@@ -116,101 +112,93 @@ class Account {
         if (!this.validate_password_characters(password)) {
             return "Error: password must contain at least one capital letter and one special character and no spaces.";
         }
-        if (this.users_db[email]) {
-            return "Error: email already in use.";
-        }
-        const emailExist = Object.values(this.users_db).some(user => user.email === email);
+        // if (this.users_db[email]) {
+        //     return "Error: email already in use.";
+        // }
+        //const emailExist = Object.values(this.users_db).some(user => user.email === email);
 
-        if(emailExist){
-            return "Error: Email already in use.";
-        }
+        // if(emailExist){
+        //     return "Error: Email already in use.";
+        // }
         
-        this.users_db[username] = { password, fname: first_name, lname: last_name, email };
+        //this.users_db[username] = { password, fname: first_name, lname: last_name, email };
         return `User ${username} registered successfully.`;
     }
 
     delete_user(username: string, password: string, email: string){
-        const user = this.users_db[username];
-        if(!user){
-            return "Error: User not found";
-        }
-        if(user.password!== password){
-            return "Error: Invalid password."
-        }
-        delete this.users_db[username];
-        this.logged_in_users.delete(username);
+        //const user = this.users_db[username];
+        // if(!user){
+        //     return "Error: User not found";
+        // }
+        // if(user.password!== password){
+        //     return "Error: Invalid password."
+        // }
+        //delete this.users_db[username];
+        //this.logged_in_users.delete(username);
         return 'User deleted successfully';
     }
     
     update_user(username: string, currentPassword: string, updates: { newPassword?: string, newEmail?: string, newFirstName?: string, newLastName?: string}): string {
-        const user = this.users_db[username];
-        if (!user){
-            return "Error: User not found.";
-        }
-        if (user.password !== currentPassword) {
-            return "Error: Invalid current password.";
-        }
-        if (updates.newEmail) {
-            if (!this.validate_email(updates.newEmail)) 
-                return "Error: Invalid new email.";
-            const emailExists = Object.values(this.users_db).some(u => u.email === updates.newEmail);
-            if (emailExists) 
-                return "Error: New email already in use.";
-            user.email = updates.newEmail;
-        }
+        //const user = this.users_db[username];
+        // if (!user){
+        //     return "Error: User not found.";
+        // }
+        // if (user.password !== currentPassword) {
+        //     return "Error: Invalid current password.";
+        // }
+        // if (updates.newEmail) {
+        //     if (!this.validate_email(updates.newEmail)) 
+        //         return "Error: Invalid new email.";
+        //     const emailExists = Object.values(this.users_db).some(u => u.email === updates.newEmail);
+        //     if (emailExists) 
+        //         return "Error: New email already in use.";
+        //     user.email = updates.newEmail;
+        // }
 
-        if (updates.newPassword) {
-            if (!this.validate_password_characters(updates.newPassword)) 
-                return "Error: New password does not meet requirements.";
-            user.password = updates.newPassword;
-        }
+        // if (updates.newPassword) {
+        //     if (!this.validate_password_characters(updates.newPassword)) 
+        //         return "Error: New password does not meet requirements.";
+        //     user.password = updates.newPassword;
+        // }
 
-        if (updates.newFirstName) {
-            if (!this.validate_first_name(updates.newFirstName)) 
-                return "Error: Invalid first name.";
-            user.fname = updates.newFirstName;
-        }
+        // if (updates.newFirstName) {
+        //     if (!this.validate_first_name(updates.newFirstName)) 
+        //         return "Error: Invalid first name.";
+        //     user.fname = updates.newFirstName;
+        // }
 
-        if (updates.newLastName) {
-            if (!this.validate_last_name(updates.newLastName)) 
-                return "Error: Invalid last name.";
-            user.lname = updates.newLastName;
-        }
+        // if (updates.newLastName) {
+        //     if (!this.validate_last_name(updates.newLastName)) 
+        //         return "Error: Invalid last name.";
+        //     user.lname = updates.newLastName;
+        // }
 
         return "User details updated successfully.";
     }
 
-    is_logged_in(username: string): boolean {
-        return this.logged_in_users.has(username);
-    }
+    // is_logged_in(username: string): boolean {
+    //     return this.logged_in_users.has(username);
+    // }
 
-    login_user(username: string, password: string): string {
-        if (!this.users_db[username]) {
-            return "Error: Invalid username or password.";
-        }
-        if (this.users_db[username].password !== password) {
-            return "Error: Invalid username or password.";
-        }
-        this.logged_in_users.add(username);
-        return `User ${username} logged in successfully.`;
-    }
+    // login_user(username: string, password: string): string {
+    //     if (!this.users_db[username]) {
+    //         return "Error: Invalid username or password.";
+    //     }
+    //     if (this.users_db[username].password !== password) {
+    //         return "Error: Invalid username or password.";
+    //     }
+    //     this.logged_in_users.add(username);
+    //     return `User ${username} logged in successfully.`;
+    // }
 
-    logout_user(username: string): string {
-        if (this.is_logged_in(username)) {
-            this.logged_in_users.delete(username);
-            return `User ${username} logged out.`;
-        }
-        return "Error: Invalid username or password.";
-    }
+    // logout_user(username: string): string {
+    //     if (this.is_logged_in(username)) {
+    //         this.logged_in_users.delete(username);
+    //         return `User ${username} logged out.`;
+    //     }
+    //     return "Error: Invalid username or password.";
+    // }
 
 }
 
-// used for some testing
-const client_account = new Account();
-
-console.log(client_account.register_user("john_doe", "Password123!", "john@example.com", "john", "doe"));  // Register user
-console.log(client_account.login_user("john_doe", "Password123!"));  // Successful login
-console.log(client_account.is_logged_in("john_doe"));  // Check login status (True)
-console.log(client_account.logout_user("john_doe"));  // Logout user
-console.log(client_account.is_logged_in("john_doe"));  // Check login status (False)
-
+export default Account;

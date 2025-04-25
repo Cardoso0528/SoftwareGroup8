@@ -1,20 +1,19 @@
 import { Service } from './service';
 
-export class Appointment {
-    username: string;
-    service: string;
+class Appointment {
+    service: Service;
     time: string;
     stylist: string;
-    notes: string;
     confirm: boolean;
+    upcoming: boolean;
 
-    appointment_db: { [key: string]: any } = {};
 
-    public get Service(): string{
+
+    public get Service(): Service{
         return this.service;
     }
 
-    public set Service(service: string){
+    public set Service(service: Service){
         this.service = service;
     }
 
@@ -34,69 +33,52 @@ export class Appointment {
         this.stylist = stylist;
     }
 
-    public get Username(): string{
-        return this.username;
-    }
-
-    public set Username(username: string){
-        this.username = username;
-    }
-
-    public get Notes(): string{
-        return this.notes;
-    }
-
-    public set Notes(notes: string){
-        this.notes = notes;
-    }
-
     public get Confirm(): boolean{
         return this.confirm;
     }
 
-    public set Comfirm(confirm: boolean){
+    public set Confirm(confirm: boolean){
         this.confirm = confirm;
     }
 
+    public get Upcoming(): boolean{
+        return this.upcoming;
+    }
 
-    applyAppointment(username: string, service: string, time: string, stylist: string,notes: string, confirm: boolean ): string {
+    public set Upcoming(upcoming: boolean){
+        this.upcoming = upcoming;
+    }
+
+    updateAppointmentService(serviceName: string, duration: number, description: string, cost: string): void {
         const newService = new Service();
-        if (newService.Name !== service) {
-            return "Invalid service details provided.";
+        if (newService.addService(serviceName, duration, description, cost)) {
+            this.service = newService;
+        } else {
+            throw new Error("Invalid service details provided.");
         }
-        this.appointment_db[username] = {service, time, stylist, notes, confirm};
-        return "Applying appointment successfully"
     }
 
-    cancelAppointment(username: string){
-        const appoint = this.appointment_db[username];
-        if(!appoint){
-            return "Error: Appointment not found";
-        }
-        delete this.appointment_db[username];
-        return 'User deleted successfully';
+    updateAppointmentTime(newTime: string): void {
+        this.time = newTime;
     }
 
-    rescheduleAppointment(username: string, update: {newTime?: string} ): string {
-        const appoint = this.appointment_db[username];
-        if(!appoint){
-            return "Error: Appointment not found";
-        }
-        if(update.newTime){
-            appoint.time = update.newTime;
-        }
-        return "Reschedule appointment succesfully."
+    updateAppointmentStylist(newStylist: string): void {
+        this.stylist = newStylist;
     }
 
-
-    confirmAppointment(): void {
-        this.confirm = true;
+    isAppointmentDone(): boolean {
+        return !this.upcoming && this.confirm;
     }
 
-    checkUpcomingAppointment(): boolean{
-        const now = new Date();
-        const apptTime = new Date(this.time);
-        return apptTime > now;
+    getServiceDetails(): { name: string; description: string; cost: string } | null {
+        if (this.service) {
+            return {
+                name: this.service.name,
+                description: this.service.description,
+                cost: this.service.cost,
+            };
+        }
+        return null;
     }
 
 }

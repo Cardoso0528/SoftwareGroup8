@@ -52,4 +52,12 @@ export const validateRegister = (req: Request, res: Response, next: NextFunction
     }
 
     next();
-}
+};
+
+export const isAuthenticated = (req: Request, res: Response, next: NextFunction): void => {
+    if (req.session && req.session.user) {
+        next();
+    } else {
+        res.status(401).json({message: 'Unauthorized access. Please log in.'});
+    }
+};

@@ -6,7 +6,9 @@ const Login = () => {
   const [isLogin, setIsLogin] = useState(true);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [name, setName] = useState('');
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [username, setUsername] = useState('');
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -44,9 +46,9 @@ const Login = () => {
               <div className="form-group">
                 <input
                   type="text"
-                  placeholder="Full Name"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
+                  placeholder="First Name"
+                  value={firstName}
+                  onChange={(e) => setFirstName(e.target.value)}
                   className="form-input"
                   required
                 />
@@ -55,15 +57,26 @@ const Login = () => {
               <div className="form-group">
               <input
                 type="text"
-                placeholder="Full Name"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
+                placeholder="Last Name"
+                value={lastName}
+                onChange={(e) => setLastName(e.target.value)}
                 className="form-input"
                 required
               />
               </div>
             </div>
           )}
+
+          <div className="form-group">
+            <input
+              type="text"
+              placeholder="Username"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              className="form-input"
+              required
+            />
+          </div>
           
           <div className="form-group">
             <input

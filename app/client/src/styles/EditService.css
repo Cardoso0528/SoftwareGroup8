@@ -1,0 +1,197 @@
+.edit-service-container {
+    padding: 24px;
+    min-height: calc(100vh - 64px); /* Subtract TopNavBar height */
+    background-color: #fce7f3;
+    padding-top: 80px;
+    width: 100%;
+    box-sizing: border-box;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    margin-top: 64px; /* Height of the TopNavBar */
+    flex: 1;
+  }
+  
+  input[type="number"]::-webkit-outer-spin-button,
+  input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  
+  input[type="number"] {
+    -moz-appearance: textfield;
+  }
+  
+  .dialog-paper {
+    width: 90%;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  
+  .service-grid {
+    display: grid;
+    gap: 16px;
+    width: 100%;
+    padding: 0 16px;
+    box-sizing: border-box;
+    flex: 1;
+    margin-top: 16px;
+    min-height: 0; /* Important for grid expansion */
+  }
+  
+  @media (min-width: 600px) {
+    .service-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+      padding: 0 24px;
+    }
+  }
+  
+  @media (min-width: 900px) {
+    .service-grid {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      padding: 0 32px;
+    }
+  }
+  
+  @media (min-width: 1200px) {
+    .edit-service-container {
+      max-width: none;
+      margin: 64px 0 0;
+      min-height: calc(100vh - 64px);
+      padding: 24px 40px;
+    }
+    
+    .service-grid {
+      grid-template-columns: repeat(4, 1fr);
+      padding: 0 40px;
+      min-height: 0;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+  }
+  
+  @media (min-width: 1600px) {
+    .edit-service-container {
+      max-width: none;
+      margin: 64px 0 0;
+      min-height: calc(100vh - 64px);
+      padding: 24px 40px;
+    }
+    
+    .service-grid {
+      grid-template-columns: repeat(5, 1fr);
+      min-height: 0;
+      max-width: 1600px;
+      margin: 0 auto;
+    }
+  }
+  
+  .search-field {
+    margin-bottom: 0;
+    width: 100%;
+    max-width: 600px;
+  }
+  
+  .header-container {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 24px;
+    position: fixed;
+    top: 64px; /* Position below the TopNavBar */
+    left: 0;
+    right: 0;
+    background-color: #fce7f3;
+    padding: 16px 24px;
+    z-index: 999; /* Below the TopNavBar */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  }
+  
+  .services-title {
+    color: black;
+  }
+  
+  .empty-state-container {
+    text-align: center;
+    margin-top: 32px;
+  }
+  
+  .empty-state-button {
+    margin-top: 16px;
+  }
+  
+  .card-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .service-price {
+    color: #666;
+    margin-bottom: 8px;
+  }
+  
+  .service-description {
+    font-size: 0.875rem;
+  }
+  
+  .dialog-content {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding-top: 8px;
+  }
+  
+  .loading-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  .error-container {
+    padding: 24px;
+    text-align: center;
+  }
+  
+  .add-service-button {
+    height: 60px;
+    font-size: 0.875rem;
+    padding: 6px 12px;
+  }
+  
+  @media (max-width: 600px) {
+    .edit-service-container {
+      padding: 16px;
+      padding-top: 16px;
+      margin-top: 56px;
+      min-height: calc(100vh - 56px);
+    }
+    
+    .service-grid {
+      padding: 0 8px;
+      gap: 12px;
+      min-height: 0;
+    }
+    
+    .dialog-paper {
+      width: 95%;
+    }
+  
+    .search-field {
+      margin-bottom: 16px;
+    }
+  }
+  
+  @media (min-width: 601px) and (max-width: 900px) {
+    .edit-service-container {
+      padding: 20px;
+    }
+    
+    .service-grid {
+      grid-template-columns: repeat(2, 1fr);
+      padding: 0 16px;
+    }
+  } 

@@ -10,6 +10,7 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { TimePicker } from '@mui/x-date-pickers/TimePicker';
+import '../styles/Availability.css';
 
 export default function AccountSetting() {
   return (
@@ -22,57 +23,65 @@ export default function AccountSetting() {
           {label: "Edit Services", path: "/edit-services"},
           {label: "Logout", path: "/"}
         ]}/>
-      <Grid container rowSpacing={2} columnSpacing={2} justifyContent={"center"}>
-        <LocalizationProvider dateAdapter={AdapterDayjs}>
-        <Grid container rowSpacing={1} columnSpacing={2} justifyContent={"center"}>
-          <Grid>
-            <DatePicker label="Select Start Date"/>
-          </Grid>
-          <Grid justifyContent={"center"}>
-            <Typography>
-              Available Time
-            </Typography>
-            <Grid container columnSpacing={1} direction={"row"}>
-              <TimePicker/>
-              <TimePicker/>
+      <Box className="availability-container">
+        <Grid container className="MuiGrid-container">
+          <Typography variant="h4" className="MuiTypography-h4">
+            Set Your Availability
+          </Typography>
+          <Typography variant="body1" className="MuiTypography-body1">
+            Configure your working hours and schedule preferences
+          </Typography>
+          <LocalizationProvider dateAdapter={AdapterDayjs}>
+            <Grid container rowSpacing={1} columnSpacing={2} justifyContent={"center"}>
+              <Grid>
+                <DatePicker label="Select Start Date" className="MuiFormControl-root"/>
+              </Grid>
+              <Grid justifyContent={"center"}>
+                <Typography className="MuiTypography-h6">
+                  Available Time
+                </Typography>
+                <Grid container columnSpacing={1} direction={"row"}>
+                  <TimePicker className="MuiFormControl-root"/>
+                  <TimePicker className="MuiFormControl-root"/>
+                </Grid>
+              </Grid>
+              <Grid justifyContent={"center"}>
+                <Typography className="MuiTypography-h6">
+                  Break
+                </Typography>
+                <Grid container columnSpacing={1} direction={"row"}>
+                  <TimePicker className="MuiFormControl-root"/>
+                  <TimePicker className="MuiFormControl-root"/>
+                </Grid>
+              </Grid>
+              <Grid justifyContent={"center"}>
+                <Typography className="MuiTypography-h6">
+                  Repeat
+                </Typography>
+                <FormGroup row={true} className="MuiFormGroup-root">
+                  <FormControlLabel control={<Checkbox/>} labelPlacement="top" label="Sat" />
+                  <FormControlLabel control={<Checkbox/>} labelPlacement="top" label="Mon" />
+                  <FormControlLabel control={<Checkbox/>} labelPlacement="top" label="Tues" />
+                  <FormControlLabel control={<Checkbox/>} labelPlacement="top" label="Wed" />
+                  <FormControlLabel control={<Checkbox/>} labelPlacement="top" label="Thurs" />
+                  <FormControlLabel control={<Checkbox/>} labelPlacement="top" label="Fri" />
+                  <FormControlLabel control={<Checkbox/>} labelPlacement="top" label="Sun" />
+                </FormGroup>
+              </Grid>
+              <Grid>
+                <DatePicker label="Select End Date" className="MuiFormControl-root"/>
+              </Grid>
             </Grid>
-          </Grid>
-          <Grid justifyContent={"center"}>
-            <Typography>
-              Break
-            </Typography>
-            <Grid container columnSpacing={1} direction={"row"}>
-              <TimePicker/>
-              <TimePicker/>
+            <Grid>
+              <Grid>
+                <Button variant="contained" className="MuiButton-contained">
+                  Save
+                </Button>
+              </Grid>
             </Grid>
-          </Grid>
-          <Grid justifyContent={"center"}>
-            <Typography>
-              Repeat
-            </Typography>
-            <FormGroup row={true}>
-              <FormControlLabel control={<Checkbox/>} labelPlacement="top" label="Sat" />
-              <FormControlLabel control={<Checkbox/>} labelPlacement="top" label="Mon" />
-              <FormControlLabel control={<Checkbox/>} labelPlacement="top" label="Tues" />
-              <FormControlLabel control={<Checkbox/>} labelPlacement="top" label="Wed" />
-              <FormControlLabel control={<Checkbox/>} labelPlacement="top" label="Thurs" />
-              <FormControlLabel control={<Checkbox/>} labelPlacement="top" label="Fri" />
-              <FormControlLabel control={<Checkbox/>} labelPlacement="top" label="Sun" />
-            </FormGroup>
-          </Grid>
-          <Grid>
-            <DatePicker label="Select End Date"/>
-          </Grid>
+          </LocalizationProvider>
         </Grid>
-        <Grid>
-          <Grid>
-            <Button variant="contained">
-              Save
-            </Button>
-          </Grid>
-        </Grid>
-        </LocalizationProvider>
-      </Grid>
+      </Box>
     </Box>
   );
 }

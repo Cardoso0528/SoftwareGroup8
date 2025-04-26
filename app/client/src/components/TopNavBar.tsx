@@ -13,7 +13,7 @@ import ListItemText from '@mui/material/ListItemText';
 import ListItemButton from '@mui/material/ListItemButton';
 import { createTheme, ThemeProvider } from '@mui/material/styles'
 
-interface NavBarProps {
+interface navBarProps {
   navText: string; 
   drawerOptions: { label: string; path: string }[]; 
 }
@@ -29,7 +29,7 @@ const theme = createTheme({
   },
 });
 
-export default function NavBar({ navText, drawerOptions }: NavBarProps) {
+export default function NavBar({ navText, drawerOptions }: navBarProps) {
   const [drawerOpen, setDrawerOpen] = useState(false); 
   const navigate = useNavigate()
 

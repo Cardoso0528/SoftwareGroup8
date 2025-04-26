@@ -12,12 +12,19 @@ export default function AccountSetting() {
     <Box>
       <NavBar
         navText="Settings"
-        drawerOptions={[
-          { label: "Account Settings", path: "/account-settings" },
+        drawerOptions={ (userType === "client") ? 
+          [
+            {label: "Dashboard", path: "/client-dashboard"},
+            {label: "Make Appointment", path: "/make-appointment"},
+            {label: "Logout", path: "/"}
+          ] :
+          [
+          { label: "Dashboard", path: "/hairstylist-dashboard" },
           { label: "Edit Services", path: "/edit-services" },
           { label: "Set Availability", path: "/set-availability" },
           { label: "Logout", path: "/" }
-        ]}
+          ]
+        }
       />
       <Box className="settings-container">
         <Box className="settings-content">

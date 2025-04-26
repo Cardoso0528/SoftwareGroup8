@@ -1,5 +1,5 @@
 import {Request, Response, NextFunction} from 'express';
-import Account from '../src/account';
+import Account from '../../../account';
 
 const account = new Account();
 

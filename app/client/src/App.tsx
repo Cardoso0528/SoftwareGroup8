@@ -7,6 +7,7 @@ import EditService from './pages/EditService'
 import Login from './pages/Login';
 import Landing from './pages/Landing';
 import AboutUs from './pages/AboutUs';
+import Services from './pages/Services';
 import './styles/App.css';
 
 function App() {
@@ -21,7 +22,7 @@ function App() {
         <Route path="/" element={<Landing />} />
         <Route path="/login" element={<Login />} />
         <Route path="/about" element={<AboutUs />} />
-        <Route path="/services" element={<div>Services Page</div>} />
+        <Route path="/services" element={<Services />} />
       </Routes>
     </Router>
   );

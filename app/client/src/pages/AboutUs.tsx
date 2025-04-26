@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './AboutUs.css';
+import '../styles/AboutUs.css';
 
 const AboutUs = () => {
   // Replace with your actual salon address

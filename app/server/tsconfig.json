@@ -1,4 +1,8 @@
 {
+    "ts-node": {
+        "transpileOnly": true
+    },
+    
     "compilerOptions": {
         "target": "es2016",
         "jsx": "preserve",
@@ -8,7 +12,9 @@
         "esModuleInterop": true,
         "forceConsistentCasingInFileNames": true,
         "strict": true,
-        "skipLibCheck": true
+        "skipLibCheck": true,
+        "typeRoots": ["../node_modules/@types", "./src/types"],
     },
+    "include": ["./src/**/*", "./src/types/**/*"],
     "exclude": ["node_modules", "dist", "client"]
 }

@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { FaCut, FaStar } from 'react-icons/fa';
-import './Landing.css';
+import '../styles/Landing.css';
 
 const Landing = () => {
   const navigate = useNavigate();

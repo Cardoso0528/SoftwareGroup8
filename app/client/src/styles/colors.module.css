@@ -1,0 +1,38 @@
+.primary {
+    background-color: #ec489a;
+    color: white;
+  }
+  
+  .primary-dark {
+    background-color: #ea0082;
+    color: white;
+  }
+  
+  .primary-light {
+    background-color: #f5b4d4;
+    color: white;
+  }
+  
+  .secondary {
+    background-color: #2577ca;
+    color: white;
+  }
+  
+  .secondary-light {
+    background-color: #4ca6ed;
+    color: white;
+  }
+  
+  .secondary-dark {
+    background-color: #1f67b8;
+    color: white;
+  }
+  
+  .confirm {
+    background-color: #2e7d32;
+  }
+  
+  .warning {
+    background-color: #d32f2f;
+    color: white;
+  }

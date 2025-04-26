@@ -9,7 +9,7 @@ const Landing = () => {
     {
       id: 1,
       name: "Custom 1",
-      avatar: "",
+      avatar: "images/placeholder.png",
       rating: 5,
       date: "X days ago",
       text: "enter review here"
@@ -17,7 +17,7 @@ const Landing = () => {
     {
       id: 2,
       name: "Custom 2",
-      avatar: "",
+      avatar: "images/placeholder.png",
       rating: 5,
       date: "X days ago",
       text: "enter review here"
@@ -25,7 +25,7 @@ const Landing = () => {
     {
       id: 3,
       name: "Custom 3",
-      avatar: "",
+      avatar: "images/placeholder.png",
       rating: 5,
       date: "X days ago",
       text: "enter review here"
@@ -76,14 +76,14 @@ const Landing = () => {
 
         <div className="hero-section">
           <img 
-            src="images/salon.jpg"
+            src="images/placeholder.png"
             alt="Salon interior"
             className="hero-image"
           />
           <div className="hero-overlay">
             <h2 className="hero-title">Title here</h2>
             <p className="hero-description">
-             Slon description
+             Salon description
             </p>
           </div>
         </div>

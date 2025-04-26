@@ -301,12 +301,12 @@ export default function EditService() {
       position: 'relative'
     }}>
       <TopNavBar 
-        navText="Services" 
+        navText="Edit Services" 
         drawerOptions={[
-          { label: 'Home', path: '/' },
-          { label: 'Services', path: '/services' },
-          { label: 'Appointments', path: '/appointments' },
-          { label: 'Profile', path: '/profile' }
+          { label: 'Account Settings', path: '/account-settings' },
+          { label: 'Edit Services', path: '/edit-services' },
+          { label: 'Set Availability', path: '/set-availability' },
+          { label: 'Logout', path: '/' }
         ]} 
       />
       <Box className="edit-service-container">

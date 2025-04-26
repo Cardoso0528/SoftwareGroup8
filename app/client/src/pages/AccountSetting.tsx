@@ -3,71 +3,96 @@ import TextField from '@mui/material/TextField';
 import NavBar from '../components/TopNavBar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
-import Divider from '@mui/material/Divider'
-import styles from '../styles/colors.module.css'
+import '../styles/AccountSetting.css';
+
 const userType: string = "client";
 
 export default function AccountSetting() {
   return (
-    <Box
-    sx={{
-      minHeight: "100vh",       
-      width: {xs: 300, sm: 600, md: 900, lg: 1200},           
-      justifyContent: "center"
-    }}>
+    <Box>
       <NavBar
         navText="Settings"
-        drawerOptions={[(userType === "client") ? { label: "Dashboard", path: "/client-dashboard" } : { label: "Dashboard", path: "/hairstylist-dashboard" }, 
-          {label: "Logout", path: "/"}
+        drawerOptions={[
+          { label: "Account Settings", path: "/account-settings" },
+          { label: "Edit Services", path: "/edit-services" },
+          { label: "Set Availability", path: "/set-availability" },
+          { label: "Logout", path: "/" }
         ]}
       />
-      <Box display="flex" flexDirection="column" >
-        <form>
-          <Typography variant="h4" align="left" my={2}>Personal</Typography>
-          <Divider/>
-          <Typography variant="h6" align="left" gutterBottom mt={2}>
-            First Name
-          </Typography>
-          <TextField fullWidth variant="outlined" 
-          sx={{ flex: "1 1 auto", minWidth: "300px", maxWidth: "100%"}}/>
-          <Typography variant="h6" align="left" gutterBottom>
-            Last Name
-          </Typography>
-          <TextField fullWidth variant="outlined" 
-          sx={{ flex: "1 1 auto", minWidth: "300px", maxWidth: "100%" }}/>
-          <Typography variant="h6" align="left" gutterBottom>
-            Email
-          </Typography>
-          <TextField fullWidth variant="outlined" 
-          sx={{ flex: "1 1 auto", minWidth: "300px", maxWidth: "100%" }}/>
-          <Typography variant="h4" align="left" my={2}>Account</Typography>
-          <Divider/>
-          <Typography variant="h6" align="left" gutterBottom mt={2}>
-            Username
-          </Typography>
-          <TextField fullWidth variant="outlined" 
-          sx={{ flex: "1 1 auto", minWidth: "300px", maxWidth: "100%" }}/>
-          <Typography variant="h6" align="left" gutterBottom>
-            Password
-          </Typography>
-          <TextField
-            fullWidth
-            type="password"
-            autoComplete="current-password"
-            variant="outlined"
-            sx={{ flex: "1 1 auto", minWidth: "300px", maxWidth: "100%"}}
-          />
-          <Box m={2}>
-            <Button variant="contained" className={styles.primary}>Save</Button>
-          </Box>
-          <Box>
-            <Typography variant="h4" align="left" my={2}>Delete Account</Typography>
-            <Divider/>
-            <Typography variant="h6" align="left" gutterBottom mt={2}>This will permanently delete your account. There is no going back.</Typography>
-            <Button variant="contained" className={styles.warning}>Delete</Button>
-          </Box>
-        </form>
+      <Box className="settings-container">
+        <Box className="settings-content">
+          <form className="settings-form">
+            <Box className="settings-section">
+              <Typography variant="h4" className="settings-title">Personal Information</Typography>
+              <Box className="settings-field">
+                <Typography variant="h6" className="settings-field-label">First Name</Typography>
+                <TextField fullWidth variant="outlined" placeholder="Enter your first name" />
+              </Box>
+              <Box className="settings-field">
+                <Typography variant="h6" className="settings-field-label">Last Name</Typography>
+                <TextField fullWidth variant="outlined" placeholder="Enter your last name" />
+              </Box>
+              <Box className="settings-field">
+                <Typography variant="h6" className="settings-field-label">Email</Typography>
+                <TextField fullWidth variant="outlined" placeholder="Enter your email" type="email" />
+              </Box>
+            </Box>
+
+            <Box className="settings-section">
+              <Typography variant="h4" className="settings-title">Account Information</Typography>
+              <Box className="settings-field">
+                <Typography variant="h6" className="settings-field-label">Username</Typography>
+                <TextField fullWidth variant="outlined" placeholder="Enter your username" />
+              </Box>
+              <Box className="settings-field">
+                <Typography variant="h6" className="settings-field-label">Password</Typography>
+                <TextField
+                  fullWidth
+                  type="password"
+                  autoComplete="current-password"
+                  variant="outlined"
+                  placeholder="Enter your password"
+                />
+              </Box>
+              <Box className="settings-button-container">
+                <Button 
+                  variant="contained" 
+                  sx={{ 
+                    backgroundColor: '#db2778',
+                    '&:hover': {
+                      backgroundColor: '#be185d',
+                    }
+                  }}
+                >
+                  Save Changes
+                </Button>
+              </Box>
+            </Box>
+
+            <Box className="settings-section">
+              <Box className="settings-field">
+                <Typography variant="h6" className="settings-field-label">
+                  Delete Account
+                </Typography>
+                <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
+                  This will permanently delete your account and all associated data. This action cannot be undone.
+                </Typography>
+                <Button 
+                  variant="contained" 
+                  sx={{ 
+                    backgroundColor: '#ef4444',
+                    '&:hover': {
+                      backgroundColor: '#dc2626',
+                    }
+                  }}
+                >
+                  Delete Account
+                </Button>
+              </Box>
+            </Box>
+          </form>
         </Box>
+      </Box>
     </Box>
   );
 }

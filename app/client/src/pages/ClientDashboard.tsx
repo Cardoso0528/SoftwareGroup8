@@ -8,6 +8,8 @@ import CardActions from '@mui/material/CardActions'
 import Typography from '@mui/material/Typography'
 import Button from '@mui/material/Button'
 import dayjs from 'dayjs'
+import styles from '../styles/colors.module.css'
+
 
 interface Appointment {
   username: string;
@@ -66,9 +68,9 @@ export default function ClientDashboard() {
                     <Typography variant="subtitle1">{dayjs(appointment.time).format("MMMM D")}</Typography>
                     <Typography variant="body2">{dayjs(appointment.time).format("h:mm A")}</Typography>
                   </CardContent>
-                  <CardActions>
-                    <Button variant="contained">Confirm</Button>
-                    <Button variant="contained">Cancel</Button>
+                  <CardActions sx={{justifyContent: "space-between"}}>
+                    <Button variant="contained" className={styles.confirm}>Confirm</Button>
+                    <Button variant="contained" className={styles.warning}>Cancel</Button>
                   </CardActions>
                 </Card>
               </Grid>

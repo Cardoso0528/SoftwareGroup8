@@ -1,0 +1,36 @@
+.make-appointment-container {
+  padding: 24px;
+  min-height: calc(100vh - 64px);
+  background-color: #fce7f3;
+  width: 100%;
+  box-sizing: border-box;
+  overflow-x: auto;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  margin-top: 64px;
+  flex: 1;
+  flex-grow: 1
+}
+
+.make-appointment-service-grid {
+  display: flex;
+  flex-direction: row;
+  flex-grow: 1;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 100vw;
+  overflow-x: auto;
+  flex-wrap: nowrap;
+}
+
+.make-appointment-time-grid {
+  display: flex;
+  flex-direction: row;
+  flex-grow: 1;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 100vw;
+  overflow-x: auto;
+  flex-wrap: wrap;
+}

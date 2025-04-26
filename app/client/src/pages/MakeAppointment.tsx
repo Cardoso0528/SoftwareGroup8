@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react'
 import Box from '@mui/material/Box'
 import Grid from '@mui/material/Grid'
 import NavBar from '../components/TopNavBar'
@@ -11,23 +12,206 @@ import TextField from '@mui/material/TextField';
 import { DatePicker } from  '@mui/x-date-pickers/DatePicker'
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import styles from '../styles/colors.module.css'
-import '../styles/scrollbar.css'
+import '../styles/MakeAppointment.css'
+import { Service } from '../types/Service'
+import CloseIcon from '@mui/icons-material/Close'
+import convertDuration from '../utils/convertDuration';
+import getTimeSlots from '../utils/getTimeSlots';
 
-const services = [
-  { name: "Haircut", cost: 50, image: "/images/placeholder.png" },
-  { name: "Coloring", cost: 35, image: "/images/placeholder.png" },
-  { name: "Styling", cost: 55, image: "/images/placeholder.png" }
+const defaultServices: Service[] = [
+  {
+    id: '1',
+    name: "Women's Haircut",
+    description: "Custom haircut by our expert stylists",
+    price: 60,
+    duration: 60
+  },
+  {
+    id: '2',
+    name: "Men's Haircut",
+    description: "Custom haircut by our expert stylists",
+    price: 30,
+    duration: 30
+  },
+  {
+    id: '3',
+    name: "Kid's Haircut",
+    description: "Custom haircut by our expert stylists",
+    price: 25,
+    duration: 45
+  },
+  {
+    id: '4',
+    name: "Brazilian Blowout",
+    description: "Expert hair coloring and highlights",
+    price: 200,
+    duration: 60
+  },
+  {
+    id: '5',
+    name: "Blowout",
+    description: "Expert hair coloring and highlights",
+    price: 45,
+    duration: 60
+  },
+  {
+    id: '6',
+    name: "Formal Style",
+    description: "Expert hair coloring and highlights",
+    price: 100,
+    duration: 90
+  },
+  {
+    id: '7',
+    name: "Silk Press Hair Styling",
+    description: "Expert hair coloring and highlights",
+    price: 80,
+    duration: 90
+  },
+  {
+    id: '8',
+    name: "Styling Class",
+    description: "Custom haircut by our expert stylists",
+    price: 100,
+    duration: 60
+  },
+  {
+    id: '9',
+    name: "Balayage Hair Coloring",
+    description: "Custom haircut by our expert stylists",
+    price: 200,
+    duration: 190
+  },
+  {
+    id: '10',
+    name: "Ombre Hair Coloring",
+    description: "Custom haircut by our expert stylists",
+    price: 180,
+    duration: 120
+  },
+  {
+    id: '11',
+    name: "All Over Color",
+    description: "Custom haircut by our expert stylists",
+    price: 110,
+    duration: 180
+  },
+  {
+    id: '12',
+    name: "Partial Highlights",
+    description: "Custom haircut by our expert stylists",
+    price: 150,
+    duration: 120
+  },
+  {
+    id: '13',
+    name: "Signature Service",
+    description: "Custom haircut by our expert stylists",
+    price: 350,
+    duration: 210
+  },
+  {
+    id: '14',
+    name: "Babylights",
+    description: "Custom haircut by our expert stylists",
+    price: 250,
+    duration: 180
+  },
+  {
+    id: '15',
+    name: "Root Touch Up",
+    description: "Custom haircut by our expert stylists",
+    price: 90,
+    duration: 120
+  },
+  {
+    id: '16',
+    name: "Men's Root Touch Up",
+    description: "Custom haircut by our expert stylists",
+    price: 70,
+    duration: 70
+  },
+  {
+    id: '17',
+    name: "Custom Hair Extension",
+    description: "Custom haircut by our expert stylists",
+    price: 500,
+    duration: 120
+  },
+  {
+    id: '18',
+    name: "Extension Maintenance",
+    description: "Custom haircut by our expert stylists",
+    price: 100,
+    duration: 60
+  },
+  {
+    id: '19',
+    name: "Extension Removal",
+    description: "Custom haircut by our expert stylists",
+    price: 85,
+    duration: 30
+  },
+  {
+    id: '20',
+    name: "Scalp Exfoliation",
+    description: "Custom haircut by our expert stylists",
+    price: 15,
+    duration: 10
+  },
+  {
+    id: '21',
+    name: "Hair Gloss Treatment",
+    description: "Custom haircut by our expert stylists",
+    price: 70,
+    duration: 45
+  },
+  {
+    id: '22',
+    name: "Hair Chalking",
+    description: "Custom haircut by our expert stylists",
+    price: 55,
+    duration: 60
+  },
+  {
+    id: '23',
+    name: "Hair Glazing Treatment",
+    description: "Custom haircut by our expert stylists",
+    price: 65,
+    duration: 45
+  },
+  {
+    id: '24',
+    name: "Keratin Treatment",
+    description: "Custom haircut by our expert stylists",
+    price: 200,
+    duration: 180
+  },
+  {
+    id: '25',
+    name: "Aromatherapy Scalp Treatment",
+    description: "Custom haircut by our expert stylists",
+    price: 30,
+    duration: 30
+  }
 ];
 
+const timeSlots = getTimeSlots("08:00 AM", "05:00 PM");
+
 export default function MakeAppointment() {
+  const [searchQuery, setSearchQuery] = useState("");
+  const [filteredServices, setFilteredServices] = useState(defaultServices);
+  const [selectedTime, setSelectedTime] = useState<string | null>(null);
+
+  useEffect(() => {
+    const newFiltered = defaultServices.filter((service) =>
+      service.name.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+    setFilteredServices(newFiltered);
+  }, [searchQuery]);
+
   return (
-    <Box
-    sx={{
-      minHeight: "100vh",       
-      width: {xs: 300, sm: 600, md: 900, lg: 1200},           
-      justifyContent: "center"
-    }}>
+    <Box>
       <NavBar
         navText="Make Appointment"
         drawerOptions={[{label: "Dashboard", path: "/client-dashboard"},
@@ -35,36 +219,56 @@ export default function MakeAppointment() {
           {label: "Logout", path: "/"}
         ]}
       />
-      <Box>
+      <Box className="make-appointment-container">
         <form>
           <LocalizationProvider dateAdapter={AdapterDayjs}>
+
             <Typography variant="h6" align="left" gutterBottom>
               Stylist
             </Typography>
             <TextField fullWidth variant="outlined" 
             sx={{ flex: "1 1 auto", minWidth: "300px", maxWidth: "100%"}}/>
+
             <Typography variant="h6" align="left" gutterBottom>
               Select Date
             </Typography>
-            <DatePicker sx={{ flex: "1 1 auto", minWidth: "300px", maxWidth: "100%", my: 2}}/>
+            <DatePicker sx={{ flex: "1 1 auto", minWidth: "300px", maxWidth: "100%", mb: 2}}/>
+
             <Typography variant="h6" align="left" gutterBottom>
+              Select Time
+            </Typography>
+            <Grid container className="make-appointment-time-grid">
+              {selectedTime ? (
+                <Grid>
+                  <Button variant="contained" onClick={() => setSelectedTime(null)} endIcon={<CloseIcon/>}>
+                    {selectedTime}
+                  </Button>
+                </Grid>
+              ) : (
+                timeSlots.map((time, index) => (
+                  <Grid key={index}>
+                    <Button variant="contained" onClick={() => setSelectedTime(time)}>
+                      {time}
+                    </Button>
+                  </Grid>
+                ))
+              )}
+            </Grid>
+            
+            <Typography variant="h6" align="left" gutterBottom mt={2}>
               Select Services
             </Typography>
-            <Grid
-              container
-              direction="row"
-              wrap="nowrap"
-              className="custom-scrollbar"
-              sx={{
-                overflowX: "auto",
-                display: "flex",
-                flexDirection: "row",
-                gap: 2,
-                padding: 1,
-              }}
-              
-            >
-              {services.map((service, index) => (
+            <TextField
+              label="Search Services"
+              variant="outlined"
+              fullWidth
+              sx={{ marginBottom: 2 }}
+              onChange={(e) => setSearchQuery(e.target.value)}
+            />
+            {filteredServices.length === 0 ? 
+            (<Typography variant="h6" sx={{ textAlign: "center", mt: 2 }}>No services found.</Typography>) : 
+            (<Grid container className="make-appointment-service-grid">
+              {filteredServices.map((service, index) => (
                 <Grid
                   key={index}
                   sx={{
@@ -74,7 +278,7 @@ export default function MakeAppointment() {
                   <Card>
                     <CardMedia
                       component="img"
-                      image={service.image}
+                      image={"/images/placeholder.png"}
                       alt={service.name} 
                       sx={{
                         width: { xs: 250, md: 400 },
@@ -83,8 +287,12 @@ export default function MakeAppointment() {
                       }}
                     />
                     <CardContent>
-                      <Typography>{service.name}</Typography> 
-                      <Typography>${service.cost}</Typography> 
+                      <Typography variant="h6" sx={{ textAlign: "center"}}>{service.name}</Typography> 
+                      <Typography variant="body1">{service.description}</Typography> 
+                      <Box display="flex" sx={{flexDirection: "row", justifyContent: "space-evenly"}}>
+                        <Typography variant="body1" fontWeight="bold">${service.price}</Typography> 
+                        <Typography variant="body1">{convertDuration(service.duration)}</Typography> 
+                      </Box>
                     </CardContent>
                     <CardActions>
                       <Button variant="contained">Add</Button>
@@ -93,18 +301,13 @@ export default function MakeAppointment() {
                 </Grid>
               ))}
             </Grid>
-            <Typography variant="h6" align="left" gutterBottom mt={2}>
-              Select Time
-            </Typography>
-            <Grid container>
-              <Grid>
-                <Button></Button>
-              </Grid>
-            </Grid>
-            <Box m={2} display="flex" justifyContent="space-around">
-              <Button variant="contained" className={styles.confirm}>Confirm Appointment</Button>
-              <Button variant="contained" className={styles.warning}>Cancel</Button>
+            )}
+
+            <Box m={2} display="flex" justifyContent="space-around" gap={2}>
+              <Button variant="contained">Confirm Appointment</Button>
+              <Button variant="contained">Cancel</Button>
             </Box>
+
           </LocalizationProvider>
         </form>
       </Box>

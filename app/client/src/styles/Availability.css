@@ -1,0 +1,142 @@
+.availability-container {
+  padding: 1.5rem;
+  min-height: calc(100vh - 64px);
+  background-color: #fce7f3;
+  width: 100%;
+  box-sizing: border-box;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  margin-top: 64px;
+  flex: 1;
+}
+
+/* Grid container styling */
+.MuiGrid-container {
+  background-color: white;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  min-height: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* Title styling */
+.MuiTypography-h4 {
+  color: #1f2937 !important;
+  font-weight: 700 !important;
+  margin-bottom: 0.5rem !important;
+  text-align: center !important;
+}
+
+.MuiTypography-body1 {
+  color: #4b5563 !important;
+  text-align: center !important;
+  margin-bottom: 2rem !important;
+}
+
+/* Typography styling */
+.MuiTypography-h6 {
+  color: #1f2937;
+  font-weight: 600 !important;
+  margin-bottom: 1rem !important;
+}
+
+/* Form control styling */
+.MuiFormControl-root {
+  margin-bottom: 1rem;
+  width: 100%;
+}
+
+/* Date and Time picker styling */
+.MuiInputBase-root {
+  border-radius: 8px !important;
+  background-color: #f9fafb !important;
+}
+
+.MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline {
+  border-color: #db2778 !important;
+}
+
+.MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
+  border-color: #db2778 !important;
+}
+
+/* Checkbox styling */
+.MuiCheckbox-root {
+  color: #db2778 !important;
+}
+
+.MuiCheckbox-root.Mui-checked {
+  color: #db2778 !important;
+}
+
+.MuiFormControlLabel-label {
+  font-weight: 500 !important;
+  color: #4b5563 !important;
+}
+
+/* Button styling */
+.MuiButton-contained {
+  background-color: #db2778 !important;
+  color: white !important;
+  text-transform: none !important;
+  font-weight: 500 !important;
+  padding: 12px 32px !important;
+  border-radius: 8px !important;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06) !important;
+  margin-top: 1.5rem !important;
+  width: 100% !important;
+  font-size: 1.1rem !important;
+}
+
+.MuiButton-contained:hover {
+  background-color: #be185d !important;
+}
+
+/* Form group styling */
+.MuiFormGroup-root {
+  justify-content: space-between;
+  padding: 0.75rem 0;
+  gap: 0.75rem;
+}
+
+/* Nested grid spacing */
+.MuiGrid-spacing-xs-2 > .MuiGrid-item {
+  padding: 8px !important;
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+  .availability-container {
+    padding: 1rem;
+    margin-top: 56px;
+  }
+  
+  .MuiGrid-container {
+    padding: 1rem;
+    gap: 1rem;
+  }
+
+  .MuiFormGroup-root {
+    justify-content: center;
+    gap: 0.5rem;
+  }
+
+  .MuiTypography-h6 {
+    margin-bottom: 0.75rem !important;
+  }
+
+  .MuiFormControl-root {
+    margin-bottom: 0.75rem;
+  }
+
+  .MuiTypography-h4 {
+    font-size: 1.75rem !important;
+  }
+} 

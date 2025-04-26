@@ -9,6 +9,7 @@ import Typography from '@mui/material/Typography'
 import Button from '@mui/material/Button'
 import dayjs from 'dayjs'
 import styles from '../styles/colors.module.css'
+import '../styles/Dashboard.css'
 
 
 interface Appointment {
@@ -47,7 +48,7 @@ export default function HairstylistDashboard() {
           {label: "Set Availability", path: "/set-availability"},
           {label: "Logout", path: "/"}
         ]}/>
-      <Box display="flex" flexDirection={{ xs: "column", md: "row" }} gap={3} p={2}>
+      <Box className="dashboard-container" display="flex" flexDirection={{ xs: "column", md: "row" }} gap={3} p={2}>
         <Box flex={1} display="flex" justifyContent="center" alignItems="center" 
         sx={{ height: { xs: "85vh", md: "95vh" }, flexGrow: 2}}>
           <Calendar 

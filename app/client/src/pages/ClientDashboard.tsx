@@ -43,10 +43,10 @@ export default function ClientDashboard() {
         navText="Dashboard"
         drawerOptions={[
           {label: "Account Settings", path: "/account-settings"},
-          {label: "Make Appointment", path: "/"},
+          {label: "Make Appointment", path: "/make-appointment"},
           {label: "Logout", path: "/"}
         ]}/>
-      <Box display="flex" flexDirection={{ xs: "column", md: "row" }} gap={3} p={2}>
+      <Box className="dashboard-container" display="flex" flexDirection={{ xs: "column", md: "row" }} gap={3} p={2}>
         <Box flex={1} display="flex" justifyContent="center" alignItems="center" 
         sx={{ height: { xs: "85vh", md: "95vh" }, flexGrow: 2}}>
           <Calendar 

@@ -13,10 +13,10 @@ const AboutUs = () => {
   };
 
   // Format the full address for display
-  const fullAddress = `${salonAddress.street}, ${salonAddress.city}, ${salonAddress.state} ${salonAddress.zip}`;
+  //const fullAddress = `${salonAddress.street}, ${salonAddress.city}, ${salonAddress.state} ${salonAddress.zip}`;
   
   // Format the address for the Google Maps embed URL
-  const mapAddress = encodeURIComponent(fullAddress);
+  //const mapAddress = encodeURIComponent(fullAddress);
 
   // State for the contact form
   const [formData, setFormData] = useState({

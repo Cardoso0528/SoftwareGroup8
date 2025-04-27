@@ -66,9 +66,6 @@
 
 .landing-button:focus {
   outline: none;
-  ring: 2px;
-  ring-offset: 2px;
-  ring-color: #f472b6;
 }
 
 .primary-button {

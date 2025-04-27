@@ -11,7 +11,7 @@ export interface Service {
     services: Service[];
     setService: (service: Service[]) => void;
     createService: (newService:  Omit<Service, "_id">) => Promise<{ success: boolean; message: string; service?: Service }>;
-    fetchService: () => Promise<void>;
+    fetchService: () => Promise<Service[]>;
     deleteService: (pid: string) => Promise<{ success: boolean; message: string }>;
     updateService: (pid: string, updatedService: Partial<Omit<Service, "_id">>) => Promise<{success: boolean; message: string}>;
   }
@@ -36,10 +36,11 @@ export interface Service {
         return {success: true, message: "Service created successfully", service: data.data};
     },
 
-    fetchService: async() =>{
+    fetchService: async(): Promise<Service[]> =>{
       const res = await fetch(`http://localhost:3000/api/service/getall`);
       const data = await res.json();
       set({services: data.data})
+      return data.data;
     },
 
     deleteService: async(pid) =>{

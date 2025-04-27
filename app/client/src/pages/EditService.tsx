@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box'
 import Card from '@mui/material/Card'
@@ -18,201 +18,37 @@ import { Service, useService } from '../types/Service';
 import TopNavBar from '../components/TopNavBar';
 import '../styles/EditService.css';
 
-const defaultServices: Service[] = [
-  {
-    _id: '1',
-    name: "Women's Haircut",
-    description: "Custom haircut by our expert stylists",
-    cost: 60,
-    duration: 60
-  },
-  {
-    _id: '2',
-    name: "Men's Haircut",
-    description: "Custom haircut by our expert stylists",
-    cost: 30,
-    duration: 30
-  },
-  {
-    _id: '3',
-    name: "Kid's Haircut",
-    description: "Custom haircut by our expert stylists",
-    cost: 25,
-    duration: 45
-  },
-  {
-    _id: '4',
-    name: "Brazilian Blowout",
-    description: "Expert hair coloring and highlights",
-    cost: 200,
-    duration: 60
-  },
-  {
-    _id: '5',
-    name: "Blowout",
-    description: "Expert hair coloring and highlights",
-    cost: 45,
-    duration: 60
-  },
-  {
-    _id: '6',
-    name: "Formal Style",
-    description: "Expert hair coloring and highlights",
-    cost: 100,
-    duration: 90
-  },
-  {
-    _id: '7',
-    name: "Silk Press Hair Styling",
-    description: "Expert hair coloring and highlights",
-    cost: 80,
-    duration: 90
-  },
-  {
-    _id: '8',
-    name: "Styling Class",
-    description: "Custom haircut by our expert stylists",
-    cost: 100,
-    duration: 60
-  },
-  {
-    _id: '9',
-    name: "Balayage Hair Coloring",
-    description: "Custom haircut by our expert stylists",
-    cost: 200,
-    duration: 190
-  },
-  {
-    _id: '10',
-    name: "Ombre Hair Coloring",
-    description: "Custom haircut by our expert stylists",
-    cost: 180,
-    duration: 120
-  },
-  {
-    _id: '11',
-    name: "All Over Color",
-    description: "Custom haircut by our expert stylists",
-    cost: 110,
-    duration: 180
-  },
-  {
-    _id: '12',
-    name: "Partial Highlights",
-    description: "Custom haircut by our expert stylists",
-    cost: 150,
-    duration: 120
-  },
-  {
-    _id: '13',
-    name: "Signature Service",
-    description: "Custom haircut by our expert stylists",
-    cost: 350,
-    duration: 210
-  },
-  {
-    _id: '14',
-    name: "Babylights",
-    description: "Custom haircut by our expert stylists",
-    cost: 250,
-    duration: 180
-  },
-  {
-    _id: '15',
-    name: "Root Touch Up",
-    description: "Custom haircut by our expert stylists",
-    cost: 90,
-    duration: 120
-  },
-  {
-    _id: '16',
-    name: "Men's Root Touch Up",
-    description: "Custom haircut by our expert stylists",
-    cost: 70,
-    duration: 70
-  },
-  {
-    _id: '17',
-    name: "Custom Hair Extension",
-    description: "Custom haircut by our expert stylists",
-    cost: 500,
-    duration: 120
-  },
-  {
-    _id: '18',
-    name: "Extension Maintenance",
-    description: "Custom haircut by our expert stylists",
-    cost: 100,
-    duration: 60
-  },
-  {
-    _id: '19',
-    name: "Extension Removal",
-    description: "Custom haircut by our expert stylists",
-    cost: 85,
-    duration: 30
-  },
-  {
-    _id: '20',
-    name: "Scalp Exfoliation",
-    description: "Custom haircut by our expert stylists",
-    cost: 15,
-    duration: 10
-  },
-  {
-    _id: '21',
-    name: "Hair Gloss Treatment",
-    description: "Custom haircut by our expert stylists",
-    cost: 70,
-    duration: 45
-  },
-  {
-    _id: '22',
-    name: "Hair Chalking",
-    description: "Custom haircut by our expert stylists",
-    cost: 55,
-    duration: 60
-  },
-  {
-    _id: '23',
-    name: "Hair Glazing Treatment",
-    description: "Custom haircut by our expert stylists",
-    cost: 65,
-    duration: 45
-  },
-  {
-    _id: '24',
-    name: "Keratin Treatment",
-    description: "Custom haircut by our expert stylists",
-    cost: 200,
-    duration: 180
-  },
-  {
-    _id: '25',
-    name: "Aromatherapy Scalp Treatment",
-    description: "Custom haircut by our expert stylists",
-    cost: 30,
-    duration: 30
-  }
-];
-
 export default function EditService() {
-  const [services, setServices] = useState<Service[]>(defaultServices);
-  const [loading, setLoading] = useState(false);
+  const [services, setServices] = useState<Service[]>([]);
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [openDialog, setOpenDialog] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
   const [editingService, setEditingService] = useState<Service | null>(null);
-  const [newService, setNewService] = useState({
+  const [newService, setNewService] = useState<Service>({
     _id: '',
     name: '',
     description: '',
     cost: 0,
-    duration: 30,
+    duration: 0,
   });
 
   const {createService} = useService()
-  const  {updateService} = useService()
+  const {updateService} = useService()
+  const {deleteService} = useService()
+  const {fetchService} = useService()
+
+  const fetchServiceData = async () => {
+    const serviceData = await fetchService()
+    setServices(serviceData);
+  }
+  
+
+  useEffect(() => {
+    fetchServiceData();
+    setLoading(false);
+  }, [])
+  
 
   const handleOpenDialog = (service?: Service) => {
     if (service) {
@@ -225,7 +61,7 @@ export default function EditService() {
         name: '',
         description: '',
         cost: 0,
-        duration: 30,
+        duration: 0,
       });
 
     }
@@ -276,6 +112,9 @@ export default function EditService() {
 
   const handleDeleteService = async (serviceId: string) => {
     try {
+      const { success, message } = await deleteService(serviceId);
+      console.log(success);
+      console.log(message);
       setServices(services.filter(s => s._id !== serviceId));
     } catch (error) {
       console.error('Error deleting service:', error);

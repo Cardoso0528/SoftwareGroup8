@@ -212,6 +212,7 @@ export default function EditService() {
   });
 
   const {createService} = useService()
+  const  {updateService} = useService()
 
   const handleOpenDialog = (service?: Service) => {
     if (service) {
@@ -235,25 +236,41 @@ export default function EditService() {
     setOpenDialog(false);
     setEditingService(null);
   };
-
   const handleSaveService = async () => {
     try {
       if (editingService) {
         // Update existing service
+        await updateServiceInDatabase(editingService._id, newService);
         setServices(services.map(s => 
           s._id === editingService._id ? { ...s, ...newService } : s
         ));
       } else {
         // Create new service
-        const {success, message} = await createService(newService)
+        const { success, message, service } = await createService(newService);
         console.log("Success: ", success);
         console.log("Message: ", message); 
-        setServices([...services, newService]);
+        if (success && service) {
+          setServices([...services, service]);
+        }
       }
       handleCloseDialog();
     } catch (error) {
       console.error('Error saving service:', error);
       setError(error instanceof Error ? error.message : 'Failed to save service');
+    }
+  };
+
+  const updateServiceInDatabase = async (serviceId: string, updatedServiceData: Partial<Omit<Service, "_id">>) => {
+    try {
+      const { success, message } = await updateService(serviceId, updatedServiceData);
+      if (success) {
+        console.log('Service updated successfully');
+        // Optionally, you can refresh your local state here if needed
+      } else {
+        console.error('Failed to update service:', message);
+      }
+    } catch (error) {
+      console.error('Error updating service:', error);
     }
   };
 

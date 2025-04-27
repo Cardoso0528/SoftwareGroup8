@@ -10,7 +10,7 @@ export interface Service {
   interface ServiceType {
     services: Service[];
     setService: (service: Service[]) => void;
-    createService: (newService:  Omit<Service, "_id">) => Promise<{ success: boolean; message: string }>;
+    createService: (newService:  Omit<Service, "_id">) => Promise<{ success: boolean; message: string; service?: Service }>;
     fetchService: () => Promise<void>;
     deleteService: (pid: string) => Promise<{ success: boolean; message: string }>;
     updateService: (pid: string, updatedService: Partial<Omit<Service, "_id">>) => Promise<{success: boolean; message: string}>;
@@ -32,8 +32,8 @@ export interface Service {
           body: JSON.stringify(newService),
         });
         const data = await res.json();
-        set((state) => ({services: [...state.services, data]}))
-        return {success: true, message: "Service created successfully", service: data};
+        set((state) => ({services: [...state.services, data.data]}))
+        return {success: true, message: "Service created successfully", service: data.data};
     },
 
     fetchService: async() =>{

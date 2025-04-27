@@ -14,184 +14,184 @@ import IconButton from '@mui/material/IconButton';
 import AddIcon from '@mui/icons-material/Add';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
-import { Service } from '../types/Service';
+import { Service, useService } from '../types/Service';
 import TopNavBar from '../components/TopNavBar';
 import '../styles/EditService.css';
 
 const defaultServices: Service[] = [
   {
-    id: '1',
+    _id: '1',
     name: "Women's Haircut",
     description: "Custom haircut by our expert stylists",
-    price: 60,
+    cost: 60,
     duration: 60
   },
   {
-    id: '2',
+    _id: '2',
     name: "Men's Haircut",
     description: "Custom haircut by our expert stylists",
-    price: 30,
+    cost: 30,
     duration: 30
   },
   {
-    id: '3',
+    _id: '3',
     name: "Kid's Haircut",
     description: "Custom haircut by our expert stylists",
-    price: 25,
+    cost: 25,
     duration: 45
   },
   {
-    id: '4',
+    _id: '4',
     name: "Brazilian Blowout",
     description: "Expert hair coloring and highlights",
-    price: 200,
+    cost: 200,
     duration: 60
   },
   {
-    id: '5',
+    _id: '5',
     name: "Blowout",
     description: "Expert hair coloring and highlights",
-    price: 45,
+    cost: 45,
     duration: 60
   },
   {
-    id: '6',
+    _id: '6',
     name: "Formal Style",
     description: "Expert hair coloring and highlights",
-    price: 100,
+    cost: 100,
     duration: 90
   },
   {
-    id: '7',
+    _id: '7',
     name: "Silk Press Hair Styling",
     description: "Expert hair coloring and highlights",
-    price: 80,
+    cost: 80,
     duration: 90
   },
   {
-    id: '8',
+    _id: '8',
     name: "Styling Class",
     description: "Custom haircut by our expert stylists",
-    price: 100,
+    cost: 100,
     duration: 60
   },
   {
-    id: '9',
+    _id: '9',
     name: "Balayage Hair Coloring",
     description: "Custom haircut by our expert stylists",
-    price: 200,
+    cost: 200,
     duration: 190
   },
   {
-    id: '10',
+    _id: '10',
     name: "Ombre Hair Coloring",
     description: "Custom haircut by our expert stylists",
-    price: 180,
+    cost: 180,
     duration: 120
   },
   {
-    id: '11',
+    _id: '11',
     name: "All Over Color",
     description: "Custom haircut by our expert stylists",
-    price: 110,
+    cost: 110,
     duration: 180
   },
   {
-    id: '12',
+    _id: '12',
     name: "Partial Highlights",
     description: "Custom haircut by our expert stylists",
-    price: 150,
+    cost: 150,
     duration: 120
   },
   {
-    id: '13',
+    _id: '13',
     name: "Signature Service",
     description: "Custom haircut by our expert stylists",
-    price: 350,
+    cost: 350,
     duration: 210
   },
   {
-    id: '14',
+    _id: '14',
     name: "Babylights",
     description: "Custom haircut by our expert stylists",
-    price: 250,
+    cost: 250,
     duration: 180
   },
   {
-    id: '15',
+    _id: '15',
     name: "Root Touch Up",
     description: "Custom haircut by our expert stylists",
-    price: 90,
+    cost: 90,
     duration: 120
   },
   {
-    id: '16',
+    _id: '16',
     name: "Men's Root Touch Up",
     description: "Custom haircut by our expert stylists",
-    price: 70,
+    cost: 70,
     duration: 70
   },
   {
-    id: '17',
+    _id: '17',
     name: "Custom Hair Extension",
     description: "Custom haircut by our expert stylists",
-    price: 500,
+    cost: 500,
     duration: 120
   },
   {
-    id: '18',
+    _id: '18',
     name: "Extension Maintenance",
     description: "Custom haircut by our expert stylists",
-    price: 100,
+    cost: 100,
     duration: 60
   },
   {
-    id: '19',
+    _id: '19',
     name: "Extension Removal",
     description: "Custom haircut by our expert stylists",
-    price: 85,
+    cost: 85,
     duration: 30
   },
   {
-    id: '20',
+    _id: '20',
     name: "Scalp Exfoliation",
     description: "Custom haircut by our expert stylists",
-    price: 15,
+    cost: 15,
     duration: 10
   },
   {
-    id: '21',
+    _id: '21',
     name: "Hair Gloss Treatment",
     description: "Custom haircut by our expert stylists",
-    price: 70,
+    cost: 70,
     duration: 45
   },
   {
-    id: '22',
+    _id: '22',
     name: "Hair Chalking",
     description: "Custom haircut by our expert stylists",
-    price: 55,
+    cost: 55,
     duration: 60
   },
   {
-    id: '23',
+    _id: '23',
     name: "Hair Glazing Treatment",
     description: "Custom haircut by our expert stylists",
-    price: 65,
+    cost: 65,
     duration: 45
   },
   {
-    id: '24',
+    _id: '24',
     name: "Keratin Treatment",
     description: "Custom haircut by our expert stylists",
-    price: 200,
+    cost: 200,
     duration: 180
   },
   {
-    id: '25',
+    _id: '25',
     name: "Aromatherapy Scalp Treatment",
     description: "Custom haircut by our expert stylists",
-    price: 30,
+    cost: 30,
     duration: 30
   }
 ];
@@ -203,12 +203,15 @@ export default function EditService() {
   const [openDialog, setOpenDialog] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
   const [editingService, setEditingService] = useState<Service | null>(null);
-  const [newService, setNewService] = useState<Partial<Service>>({
+  const [newService, setNewService] = useState({
+    _id: '',
     name: '',
     description: '',
-    price: 0,
+    cost: 0,
     duration: 30,
   });
+
+  const {createService} = useService()
 
   const handleOpenDialog = (service?: Service) => {
     if (service) {
@@ -217,11 +220,13 @@ export default function EditService() {
     } else {
       setEditingService(null);
       setNewService({
+        _id: '',
         name: '',
         description: '',
-        price: 0,
+        cost: 0,
         duration: 30,
       });
+
     }
     setOpenDialog(true);
   };
@@ -236,19 +241,14 @@ export default function EditService() {
       if (editingService) {
         // Update existing service
         setServices(services.map(s => 
-          s.id === editingService.id ? { ...s, ...newService } : s
+          s._id === editingService._id ? { ...s, ...newService } : s
         ));
       } else {
         // Create new service
-        const newId = (services.length + 1).toString();
-        const createdService: Service = {
-          id: newId,
-          name: newService.name || '',
-          description: newService.description || '',
-          price: newService.price || 0,
-          duration: newService.duration || 30,
-        };
-        setServices([...services, createdService]);
+        const {success, message} = await createService(newService)
+        console.log("Success: ", success);
+        console.log("Message: ", message); 
+        setServices([...services, newService]);
       }
       handleCloseDialog();
     } catch (error) {
@@ -259,7 +259,7 @@ export default function EditService() {
 
   const handleDeleteService = async (serviceId: string) => {
     try {
-      setServices(services.filter(s => s.id !== serviceId));
+      setServices(services.filter(s => s._id !== serviceId));
     } catch (error) {
       console.error('Error deleting service:', error);
       setError(error instanceof Error ? error.message : 'Failed to delete service');
@@ -363,7 +363,7 @@ export default function EditService() {
         ) : (
           <Box className="service-grid">
             {filteredServices.map((service) => (
-              <Box key={service.id} sx={{ height: '100%' }}>
+              <Box key={service._id} sx={{ height: '100%' }}>
                 <Card sx={{ height: '100%' }}>
                   <CardContent>
                     <Box className="card-actions">
@@ -372,13 +372,13 @@ export default function EditService() {
                         <IconButton onClick={() => handleOpenDialog(service)}>
                           <EditIcon />
                         </IconButton>
-                        <IconButton onClick={() => handleDeleteService(service.id)}>
+                        <IconButton onClick={() => handleDeleteService(service._id)}>
                           <DeleteIcon />
                         </IconButton>
                       </Box>
                     </Box>
                     <Typography className="service-price" gutterBottom>
-                      ${service.price} - {service.duration} minutes
+                      ${service.cost} - {service.duration} minutes
                     </Typography>
                     <Typography className="service-description">{service.description}</Typography>
                   </CardContent>
@@ -421,8 +421,8 @@ export default function EditService() {
               label="Price"
               type="number"
               fullWidth
-              value={newService.price}
-              onChange={(e) => setNewService({ ...newService, price: Number(e.target.value) })}
+              value={newService.cost}
+              onChange={(e) => setNewService({ ...newService, cost: Number(e.target.value) })}
             />
             <TextField
               margin="dense"

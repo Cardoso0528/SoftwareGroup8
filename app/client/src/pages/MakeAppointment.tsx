@@ -20,178 +20,178 @@ import getTimeSlots from '../utils/getTimeSlots';
 
 const defaultServices: Service[] = [
   {
-    id: '1',
+    _id: '1',
     name: "Women's Haircut",
     description: "Custom haircut by our expert stylists",
-    price: 60,
+    cost: 60,
     duration: 60
   },
   {
-    id: '2',
+    _id: '2',
     name: "Men's Haircut",
     description: "Custom haircut by our expert stylists",
-    price: 30,
+    cost: 30,
     duration: 30
   },
   {
-    id: '3',
+    _id: '3',
     name: "Kid's Haircut",
     description: "Custom haircut by our expert stylists",
-    price: 25,
+    cost: 25,
     duration: 45
   },
   {
-    id: '4',
+    _id: '4',
     name: "Brazilian Blowout",
     description: "Expert hair coloring and highlights",
-    price: 200,
+    cost: 200,
     duration: 60
   },
   {
-    id: '5',
+    _id: '5',
     name: "Blowout",
     description: "Expert hair coloring and highlights",
-    price: 45,
+    cost: 45,
     duration: 60
   },
   {
-    id: '6',
+    _id: '6',
     name: "Formal Style",
     description: "Expert hair coloring and highlights",
-    price: 100,
+    cost: 100,
     duration: 90
   },
   {
-    id: '7',
+    _id: '7',
     name: "Silk Press Hair Styling",
     description: "Expert hair coloring and highlights",
-    price: 80,
+    cost: 80,
     duration: 90
   },
   {
-    id: '8',
+    _id: '8',
     name: "Styling Class",
     description: "Custom haircut by our expert stylists",
-    price: 100,
+    cost: 100,
     duration: 60
   },
   {
-    id: '9',
+    _id: '9',
     name: "Balayage Hair Coloring",
     description: "Custom haircut by our expert stylists",
-    price: 200,
+    cost: 200,
     duration: 190
   },
   {
-    id: '10',
+    _id: '10',
     name: "Ombre Hair Coloring",
     description: "Custom haircut by our expert stylists",
-    price: 180,
+    cost: 180,
     duration: 120
   },
   {
-    id: '11',
+    _id: '11',
     name: "All Over Color",
     description: "Custom haircut by our expert stylists",
-    price: 110,
+    cost: 110,
     duration: 180
   },
   {
-    id: '12',
+    _id: '12',
     name: "Partial Highlights",
     description: "Custom haircut by our expert stylists",
-    price: 150,
+    cost: 150,
     duration: 120
   },
   {
-    id: '13',
+    _id: '13',
     name: "Signature Service",
     description: "Custom haircut by our expert stylists",
-    price: 350,
+    cost: 350,
     duration: 210
   },
   {
-    id: '14',
+    _id: '14',
     name: "Babylights",
     description: "Custom haircut by our expert stylists",
-    price: 250,
+    cost: 250,
     duration: 180
   },
   {
-    id: '15',
+    _id: '15',
     name: "Root Touch Up",
     description: "Custom haircut by our expert stylists",
-    price: 90,
+    cost: 90,
     duration: 120
   },
   {
-    id: '16',
+    _id: '16',
     name: "Men's Root Touch Up",
     description: "Custom haircut by our expert stylists",
-    price: 70,
+    cost: 70,
     duration: 70
   },
   {
-    id: '17',
+    _id: '17',
     name: "Custom Hair Extension",
     description: "Custom haircut by our expert stylists",
-    price: 500,
+    cost: 500,
     duration: 120
   },
   {
-    id: '18',
+    _id: '18',
     name: "Extension Maintenance",
     description: "Custom haircut by our expert stylists",
-    price: 100,
+    cost: 100,
     duration: 60
   },
   {
-    id: '19',
+    _id: '19',
     name: "Extension Removal",
     description: "Custom haircut by our expert stylists",
-    price: 85,
+    cost: 85,
     duration: 30
   },
   {
-    id: '20',
+    _id: '20',
     name: "Scalp Exfoliation",
     description: "Custom haircut by our expert stylists",
-    price: 15,
+    cost: 15,
     duration: 10
   },
   {
-    id: '21',
+    _id: '21',
     name: "Hair Gloss Treatment",
     description: "Custom haircut by our expert stylists",
-    price: 70,
+    cost: 70,
     duration: 45
   },
   {
-    id: '22',
+    _id: '22',
     name: "Hair Chalking",
     description: "Custom haircut by our expert stylists",
-    price: 55,
+    cost: 55,
     duration: 60
   },
   {
-    id: '23',
+    _id: '23',
     name: "Hair Glazing Treatment",
     description: "Custom haircut by our expert stylists",
-    price: 65,
+    cost: 65,
     duration: 45
   },
   {
-    id: '24',
+    _id: '24',
     name: "Keratin Treatment",
     description: "Custom haircut by our expert stylists",
-    price: 200,
+    cost: 200,
     duration: 180
   },
   {
-    id: '25',
+    _id: '25',
     name: "Aromatherapy Scalp Treatment",
     description: "Custom haircut by our expert stylists",
-    price: 30,
+    cost: 30,
     duration: 30
   }
 ];
@@ -290,7 +290,7 @@ export default function MakeAppointment() {
                       <Typography variant="h6" sx={{ textAlign: "center"}}>{service.name}</Typography> 
                       <Typography variant="body1">{service.description}</Typography> 
                       <Box display="flex" sx={{flexDirection: "row", justifyContent: "space-evenly"}}>
-                        <Typography variant="body1" fontWeight="bold">${service.price}</Typography> 
+                        <Typography variant="body1" fontWeight="bold">${service.cost}</Typography> 
                         <Typography variant="body1">{convertDuration(service.duration)}</Typography> 
                       </Box>
                     </CardContent>

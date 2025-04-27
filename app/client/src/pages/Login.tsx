@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { FaGoogle, FaApple } from 'react-icons/fa';
 import '../styles/Login.css';
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
   const [isLogin, setIsLogin] = useState(true);
@@ -10,10 +11,46 @@ const Login = () => {
   const [lastName, setLastName] = useState('');
   const [username, setUsername] = useState('');
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const navigate = useNavigate();
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle form submission here
-    console.log('Form submitted:', { email, password, name });
+  
+    const url = isLogin ? 'http://localhost:3000/api/login' : 'http://localhost:3000/api/register';
+    const payload = isLogin
+      ? { username, email, password }
+      : { email, password, username: username, firstname: firstName, lastname: lastName, userType: 'client' }; // adjust fields as needed
+  
+    try {
+      const response = await fetch(url, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        credentials: 'include', // 🔑 This allows cookies/session to be sent
+        body: JSON.stringify(payload),
+      });
+  
+      const data = await response.json();
+  
+      if (!response.ok) {
+        alert(data.message || 'Something went wrong');
+        return;
+      }
+  
+      console.log('✅ Success:', data);
+      // Redirect to dashboard or homepage, etc.
+      const userType = data.user.userType; // Assuming the response contains userType
+
+      if(userType === 'Stylist') {
+        navigate('/hairstylist-dashboard');
+      } else {
+        navigate('/client-dashboard');
+      }
+    } catch (err) {
+      console.error('❌ Error:', err);
+      alert('Server error, try again later');
+    }
   };
 
   const handleGoogleLogin = () => {

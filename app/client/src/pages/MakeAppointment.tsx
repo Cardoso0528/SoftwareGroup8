@@ -222,7 +222,6 @@ export default function MakeAppointment() {
 
   const handleSelectDate = (date: Dayjs | null) => {
     if (date) {
-      console.log("Selected Date:", date.format("YYYY-MM-DD"));
       setSelectedDate(date); 
     } else {
       setSelectedDate(null); 
@@ -236,15 +235,12 @@ export default function MakeAppointment() {
   
   const handleWrittenStylist = (stylist: string) => {
     setWrittenStylist(stylist); 
-    console.log("Selected Stylist:", stylist); 
 
   };
   const handleSelectTime = (time: string) => {
-    console.log("Selected Time:", time); 
     setSelectedTime(time); 
   };
   const handleConfirmAppointment = async () => {
-    console.log("Final Selected Services:", selectedService); // Debugging log
     if (!selectedDate || !selectedTime || !writtenSylist || !selectedService) {
       alert("Please fill out all fields before confirming the appointment.");
       return;
@@ -260,7 +256,6 @@ export default function MakeAppointment() {
     };
   
   
-    console.log("Sending appointment data:", appointmentData); 
   
     const url = 'http://localhost:3000/api/appointment/apply';
 

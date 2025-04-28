@@ -17,6 +17,7 @@ import { Service } from '../types/Service'
 import CloseIcon from '@mui/icons-material/Close'
 import convertDuration from '../utils/convertDuration';
 import getTimeSlots from '../utils/getTimeSlots';
+import dayjs, { Dayjs } from 'dayjs';
 
 const defaultServices: Service[] = [
   {
@@ -202,6 +203,9 @@ export default function MakeAppointment() {
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredServices, setFilteredServices] = useState(defaultServices);
   const [selectedTime, setSelectedTime] = useState<string | null>(null);
+  const [selectedDate, setSelectedDate] = useState<Dayjs | null>(dayjs()); 
+  const [writtenSylist, setWrittenStylist] = useState<string | null>(null);
+  const [selectedService, setSelectedServices] = useState<Service | null>(null);
 
   useEffect(() => {
     const newFiltered = defaultServices.filter((service) =>
@@ -210,6 +214,76 @@ export default function MakeAppointment() {
     setFilteredServices(newFiltered);
   }, [searchQuery]);
 
+  const handleAddService = (service: Service) => {
+    console.log("Adding service:", service);
+    setSelectedServices(service);
+  };
+
+
+  const handleSelectDate = (date: Dayjs | null) => {
+    if (date) {
+      console.log("Selected Date:", date.format("YYYY-MM-DD"));
+      setSelectedDate(date); 
+    } else {
+      setSelectedDate(null); 
+    }
+  };
+  // TODO: Add a notes section
+  //Const handleNotes = (notes: string) => 
+
+
+  //Change when there is drop down for stylist
+  
+  const handleWrittenStylist = (stylist: string) => {
+    setWrittenStylist(stylist); 
+    console.log("Selected Stylist:", stylist); 
+
+  };
+  const handleSelectTime = (time: string) => {
+    console.log("Selected Time:", time); 
+    setSelectedTime(time); 
+  };
+  const handleConfirmAppointment = async () => {
+    console.log("Final Selected Services:", selectedService); // Debugging log
+    if (!selectedDate || !selectedTime || !writtenSylist || !selectedService) {
+      alert("Please fill out all fields before confirming the appointment.");
+      return;
+    }
+    // change when notes and cofirm are fixed
+    const appointmentData = {
+      stylist: writtenSylist,
+      date: selectedDate.format("YYYY-MM-DD"),
+      time: selectedTime,
+      service: selectedService.name,
+      notes: "No special notes",
+      confirm: true
+    };
+  
+  
+    console.log("Sending appointment data:", appointmentData); 
+  
+    const url = 'http://localhost:3000/api/appointment/apply';
+
+    try {
+      const response = await fetch(url, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(appointmentData),
+        credentials: "include", 
+      });
+  
+      if (response.ok) {
+        alert("Appointment successfully created!");
+      } else {
+        alert("Failed to create appointment. Please try again.");
+      }
+    } catch (error) {
+      console.error("Error sending appointment data:", error);
+      alert("An error occurred. Please try again.");
+    }
+  };
   return (
     <Box>
       <NavBar
@@ -226,14 +300,14 @@ export default function MakeAppointment() {
             <Typography variant="h6" align="left" gutterBottom>
               Stylist
             </Typography>
-            <TextField fullWidth variant="outlined" 
+            <TextField fullWidth variant="outlined" value={writtenSylist || ""} onChange={(e) => handleWrittenStylist(e.target.value)} 
             sx={{ flex: "1 1 auto", minWidth: "300px", maxWidth: "100%"}}/>
 
             <Typography variant="h6" align="left" gutterBottom>
               Select Date
             </Typography>
-            <DatePicker sx={{ flex: "1 1 auto", minWidth: "300px", maxWidth: "100%", mb: 2}}/>
-
+            <DatePicker label="Select Date" value={selectedDate} onChange={(newValue) => handleSelectDate(newValue)} sx={{ flex: "1 1 auto", minWidth: "300px", maxWidth: "100%", mb: 2 }}
+/>
             <Typography variant="h6" align="left" gutterBottom>
               Select Time
             </Typography>
@@ -247,7 +321,7 @@ export default function MakeAppointment() {
               ) : (
                 timeSlots.map((time, index) => (
                   <Grid key={index}>
-                    <Button variant="contained" onClick={() => setSelectedTime(time)}>
+                    <Button variant="contained" onClick={() => handleSelectTime(time)}>
                       {time}
                     </Button>
                   </Grid>
@@ -295,7 +369,10 @@ export default function MakeAppointment() {
                       </Box>
                     </CardContent>
                     <CardActions>
-                      <Button variant="contained">Add</Button>
+                      <Button variant="contained"onClick={() => handleAddService(service)} disabled ={selectedService?._id === service._id} sx={{ flex: "1 1 auto", minWidth: "300px", maxWidth: "100%"}}
+                      >
+                      {selectedService?._id === service._id ? "Selected" : "Select"}
+                      </Button>
                     </CardActions>
                   </Card>
                 </Grid>
@@ -304,7 +381,7 @@ export default function MakeAppointment() {
             )}
 
             <Box m={2} display="flex" justifyContent="space-around" gap={2}>
-              <Button variant="contained">Confirm Appointment</Button>
+              <Button variant="contained" onClick={handleConfirmAppointment}>Confirm Appointment</Button>
               <Button variant="contained">Cancel</Button>
             </Box>
 

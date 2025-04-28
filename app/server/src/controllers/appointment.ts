@@ -4,13 +4,18 @@ import { getAppointment, createAppointment, deleteAppointmentByID, updateAppoint
 
 export const applyAppointment = async (req: Request, res: Response): Promise<void> => {
     try{
-    const {username, service, time, stylist, notes, confirm } = req.body;
-    if (!username || !service || !time || !stylist || !notes || !confirm)  {
+    //captures the session cookie
+    const username = req.session.user?.username;
+    const { service, time, stylist, notes, confirm } = req.body;
+    if (!service || !time || !stylist || !notes || !confirm)  {
         res.status(400).json({ message: 'All fields are required' });
         return;
     }
 
-    const existingService = await Service.findOne({ name: service });
+    const serviceName = service.name;
+
+
+    const existingService = await Service.findOne({ name: serviceName});
     if (!existingService) {
         res.status(404).json({ message: 'Service not found' });
         return;

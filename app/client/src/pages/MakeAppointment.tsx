@@ -285,7 +285,7 @@ export default function MakeAppointment() {
         navText="Make Appointment"
         drawerOptions={[{label: "Dashboard", path: "/client-dashboard"},
           {label: "Account Settings", path: "/account-settings"},
-          {label: "Logout", path: "/"}
+          {label: "Logout", path: "logout"}
         ]}
       />
       <Box className="make-appointment-container">

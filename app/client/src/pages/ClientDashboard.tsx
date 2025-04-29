@@ -44,7 +44,7 @@ export default function ClientDashboard() {
         drawerOptions={[
           {label: "Account Settings", path: "/account-settings"},
           {label: "Make Appointment", path: "/make-appointment"},
-          {label: "Logout", path: "/"}
+          {label: "Logout", path: "logout"}
         ]}/>
       <Box className="dashboard-container" display="flex" flexDirection={{ xs: "column", md: "row" }} gap={3} p={2}>
         <Box flex={1} display="flex" justifyContent="center" alignItems="center" 

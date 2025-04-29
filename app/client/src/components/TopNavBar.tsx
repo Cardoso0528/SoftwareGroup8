@@ -37,8 +37,20 @@ export default function NavBar({ navText, drawerOptions }: navBarProps) {
     setDrawerOpen(open);
   };
 
-  const handleNavigation = (path: string) => {
-    navigate(path); 
+  const handleNavigation = async (path: string) => {
+    if (path === "logout") {
+      try {
+        await fetch('/api/logout', {
+          method: 'POST',
+          credentials: 'include', // Include cookies in the request
+        });
+        navigate('/');
+      } catch (error) {
+        console.error('Logout failed:', error);
+      }
+    } else {
+      navigate(path);
+    }
     setDrawerOpen(false); 
   };
 

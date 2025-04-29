@@ -160,7 +160,7 @@ export default function EditService() {
           { label: 'Account Settings', path: '/account-settings' },
           { label: 'Edit Services', path: '/edit-services' },
           { label: 'Set Availability', path: '/set-availability' },
-          { label: 'Logout', path: '/' }
+          { label: 'Logout', path: 'logout' }
         ]} 
       />
       <Box className="edit-service-container">

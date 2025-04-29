@@ -96,6 +96,15 @@ export const register = async (req: Request, res: Response, next: NextFunction):
         });
 
         const { password: _, ...userWithoutPassword } = user.toObject();
+
+        req.session.user = {
+            _id: user._id,
+            email: user.email,
+            username: user.username,
+            firstname: user.firstname,
+            lastname: user.lastname,
+            userType: user.userType,
+        };
         res.status(200).json({message: 'Registration successful', user: userWithoutPassword});
     } catch (error) {
         console.log(error);

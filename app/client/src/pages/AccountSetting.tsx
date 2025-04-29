@@ -16,13 +16,13 @@ export default function AccountSetting() {
           [
             {label: "Dashboard", path: "/client-dashboard"},
             {label: "Make Appointment", path: "/make-appointment"},
-            {label: "Logout", path: "/"}
+            {label: "Logout", path: "logout"}
           ] :
           [
           { label: "Dashboard", path: "/hairstylist-dashboard" },
           { label: "Edit Services", path: "/edit-services" },
           { label: "Set Availability", path: "/set-availability" },
-          { label: "Logout", path: "/" }
+          { label: "Logout", path: "logout" }
           ]
         }
       />

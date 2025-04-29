@@ -21,7 +21,7 @@ export default function AccountSetting() {
           {label: "Dashboard", path: "/hairstylist-dashboard"},
           {label: "Account Settings", path: "/account-settings"},
           {label: "Edit Services", path: "/edit-services"},
-          {label: "Logout", path: "/"}
+          {label: "Logout", path: "logout"}
         ]}/>
       <Box className="availability-container">
         <Grid container className="MuiGrid-container">

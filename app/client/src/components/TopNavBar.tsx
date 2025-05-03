@@ -40,7 +40,7 @@ export default function NavBar({ navText, drawerOptions }: navBarProps) {
   const handleNavigation = async (path: string) => {
     if (path === "logout") {
       try {
-        await fetch('/api/logout', {
+        await fetch('http://localhost:3000/api/logout', {
           method: 'POST',
           credentials: 'include', // Include cookies in the request
         });
